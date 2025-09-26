@@ -1,0 +1,4 @@
+public_parks/res
+.*
+!.gitignore
+public_parks/data

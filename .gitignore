@@ -1,0 +1,5 @@
+.*
+!.gitignore
+ext_data/
+__pycache__/
+res/
