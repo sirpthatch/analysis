@@ -43,3 +43,11 @@ https://council.nyc.gov/budget/wp-content/uploads/sites/54/2024/03/858-DoITT-1.p
 
 Intersection advertising media kit: https://ixn-p-81a77edd0ffa.s3.amazonaws.com/wp-content/uploads/2017/08/02094203/new-york-ooh-linknyc-advertising-media-kit-intersection-3.pdf
 3.4B monthly impressions
+
+python3 dev/render_census_map.py --tracts --nyc \                                     
+    --choropleth data/census_tract_median_income.csv \
+    --fips-col TRACT_FIPS \
+    --value-col MEDIAN_INCOME \
+    --colormap Blues \
+    --legend-title "Median Household Income ($)" \
+    --output output/nyc_income_map.png
