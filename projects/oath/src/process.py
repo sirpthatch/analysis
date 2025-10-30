@@ -3,6 +3,13 @@ import pandas as pd
 import click
 import importlib
 import shutil
+import geopandas as gpd
+from shapely.geometry import Point
+from constants import GEOTRACT_FILE
+import time
+import psutil
+import os
+
 
 class EtlModule(object):
     """
@@ -16,6 +23,39 @@ class EtlModule(object):
         * It will not overwrite any existing partition - if the partition is
           already written, it will skip it
     """
+
+
+    def get_fips_mapper(self, mapper_file=None):
+        """
+        Returns a fast FIPS lookup function using spatial indexing.
+        The spatial index (R-tree) enables O(log n) lookups instead of O(n).
+        """
+        if mapper_file is None:
+            mapper_file = gpd.read_file(GEOTRACT_FILE)
+
+        # Build spatial index once for fast lookups
+        # This creates an R-tree that enables O(log n) spatial queries
+        sindex = mapper_file.sindex
+
+        def lookup_fips(lat, lng):
+            point = Point(lng, lat)
+
+            # Use spatial index to get candidate geometries (very fast)
+            # This narrows down to just a few candidates instead of checking all
+            possible_matches_idx = list(sindex.intersection(point.bounds))
+
+            if not possible_matches_idx:
+                return None  # No FIPS found for this location
+
+            # Check actual containment only on candidates (usually just 1-2 geometries)
+            possible_matches = mapper_file.iloc[possible_matches_idx]
+            precise_match = possible_matches[possible_matches.contains(point)]
+
+            if len(precise_match) > 0:
+                return precise_match['GEOID'].iloc[0]
+            return None
+
+        return lookup_fips
 
     def partition(self, file_paths:list[Path]) -> dict[Path, list[str]]:
         """
@@ -79,10 +119,17 @@ def cli():
 @click.option('--name', required=True, type=str, help='Module name to use')
 def ingest(src: Path, out: Path, name: str):
     """Process raw source files and generate output partitions."""
+    # Start timing and memory tracking
+    start_time = time.time()
+    process = psutil.Process(os.getpid())
+    start_memory = process.memory_info().rss / 1024 / 1024  # Convert to MB
+
     click.echo("="*50)
     click.echo(f"Processing files from: {src}")
     click.echo(f"Output directory: {out}")
     click.echo(f"Module name: {name}")
+    click.echo(f"Start time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))}")
+    click.echo(f"Initial memory: {start_memory:.2f} MB")
     click.echo("\n")
 
     available_paths = [p for p in src.iterdir() if p.is_file() and not p.name.startswith(".")]
@@ -144,7 +191,7 @@ def ingest(src: Path, out: Path, name: str):
     click.echo("\n\n")
 
     data_frames = etl_instance.process_files(paths_to_process)
-   
+
     for part, frame in data_frames.items():
         if part in existing_partitions:
             continue
@@ -152,6 +199,25 @@ def ingest(src: Path, out: Path, name: str):
         output_path = out / part / "data.csv"
         output_path.parent.mkdir(parents=True, exist_ok=True)
         frame.to_csv(output_path, index=False)
+
+    # End timing and memory tracking
+    end_time = time.time()
+    end_memory = process.memory_info().rss / 1024 / 1024  # Convert to MB
+    elapsed_time = end_time - start_time
+    memory_delta = end_memory - start_memory
+    peak_memory = process.memory_info().rss / 1024 / 1024  # Current memory usage
+
+    click.echo("\n")
+    click.echo("="*50)
+    click.echo("PERFORMANCE METRICS")
+    click.echo("="*50)
+    click.echo(f"End time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))}")
+    click.echo(f"Total runtime: {elapsed_time:.2f} seconds ({elapsed_time/60:.2f} minutes)")
+    click.echo(f"Initial memory: {start_memory:.2f} MB")
+    click.echo(f"Final memory: {end_memory:.2f} MB")
+    click.echo(f"Memory delta: {memory_delta:+.2f} MB")
+    click.echo(f"Peak memory: {peak_memory:.2f} MB")
+    click.echo("="*50)
 
 
 @cli.command()
@@ -163,9 +229,20 @@ def ingest(src: Path, out: Path, name: str):
 @click.option('--dry-run', is_flag=True, help='Show what would be deleted without actually deleting')
 def clean(src: Path, out: Path, name: str, dry_run: bool):
     """Clean output partitions that would be generated from source files."""
+    # Start timing and memory tracking
+    start_time = time.time()
+    process = psutil.Process(os.getpid())
+    start_memory = process.memory_info().rss / 1024 / 1024  # Convert to MB
+
+    click.echo("="*50)
     click.echo(f"Cleaning partitions from: {out}")
     click.echo(f"Based on source files in: {src}")
     click.echo(f"Module name: {name}")
+    click.echo(f"Start time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(start_time))}")
+    click.echo(f"Initial memory: {start_memory:.2f} MB")
+    if dry_run:
+        click.echo("[DRY RUN MODE]")
+    click.echo("="*50)
 
     available_paths = [p for p in src.iterdir() if p.is_file()]
 
@@ -200,6 +277,18 @@ def clean(src: Path, out: Path, name: str, dry_run: bool):
 
     if not existing_to_delete:
         click.echo("No partitions found to clean.")
+        # End timing and memory tracking
+        end_time = time.time()
+        end_memory = process.memory_info().rss / 1024 / 1024
+        elapsed_time = end_time - start_time
+        memory_delta = end_memory - start_memory
+        click.echo("\n")
+        click.echo("="*50)
+        click.echo("PERFORMANCE METRICS")
+        click.echo("="*50)
+        click.echo(f"Total runtime: {elapsed_time:.2f} seconds")
+        click.echo(f"Memory delta: {memory_delta:+.2f} MB")
+        click.echo("="*50)
         return
 
     click.echo(f"\nPartitions to {'be deleted' if not dry_run else 'delete (dry-run)'}:")
@@ -208,6 +297,18 @@ def clean(src: Path, out: Path, name: str, dry_run: bool):
 
     if dry_run:
         click.echo("\nDry-run mode: no files were deleted.")
+        # End timing and memory tracking
+        end_time = time.time()
+        end_memory = process.memory_info().rss / 1024 / 1024
+        elapsed_time = end_time - start_time
+        memory_delta = end_memory - start_memory
+        click.echo("\n")
+        click.echo("="*50)
+        click.echo("PERFORMANCE METRICS")
+        click.echo("="*50)
+        click.echo(f"Total runtime: {elapsed_time:.2f} seconds")
+        click.echo(f"Memory delta: {memory_delta:+.2f} MB")
+        click.echo("="*50)
         return
 
     if click.confirm(f"\nAre you sure you want to delete {len(existing_to_delete)} partition(s)?"):
@@ -217,6 +318,24 @@ def clean(src: Path, out: Path, name: str, dry_run: bool):
         click.echo(f"\nSuccessfully deleted {len(existing_to_delete)} partition(s).")
     else:
         click.echo("Clean operation cancelled.")
+
+    # End timing and memory tracking
+    end_time = time.time()
+    end_memory = process.memory_info().rss / 1024 / 1024
+    elapsed_time = end_time - start_time
+    memory_delta = end_memory - start_memory
+
+    click.echo("\n")
+    click.echo("="*50)
+    click.echo("PERFORMANCE METRICS")
+    click.echo("="*50)
+    click.echo(f"End time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))}")
+    click.echo(f"Total runtime: {elapsed_time:.2f} seconds")
+    click.echo(f"Initial memory: {start_memory:.2f} MB")
+    click.echo(f"Final memory: {end_memory:.2f} MB")
+    click.echo(f"Memory delta: {memory_delta:+.2f} MB")
+    click.echo(f"Partitions deleted: {len(existing_to_delete) if not dry_run else 0}")
+    click.echo("="*50)
 
 
 if __name__ == "__main__":
