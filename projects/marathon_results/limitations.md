@@ -1,0 +1,2 @@
+# Observed Limitations:
++ Not every record has enough geographic information to map to a particular location (some major marathons, like London only have 'Country') - perhaps we can infer the location of individuals using other marathons (though that would be inaccurate since people can move around)

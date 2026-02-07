@@ -1,0 +1,19 @@
+# Core data analysis packages
+pandas==3.0.0
+numpy==2.4.1
+
+# Visualization
+matplotlib==3.10.8
+seaborn==0.13.2
+
+# Jupyter notebooks
+jupyter==1.1.1
+ipykernel==7.1.0
+
+# Additional useful packages
+scipy==1.17.0
+scikit-learn==1.8.0
+pyarrow==23.0.0
+click==8.3.1
+openmeteo_requests==1.7.5
+tqdm==4.67.1
