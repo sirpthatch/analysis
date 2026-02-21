@@ -46,23 +46,29 @@ class CheckpointIterator:
     def _load_existing(self):
         """Load existing results if the file exists."""
         if self.output_path.exists():
-            existing_df = pd.read_csv(self.output_path)
-            self.results = existing_df.to_dict('records')
-            
-            # Track completed items by key fields
-            if self.key_fields:
-                self.completed_keys = {
-                    tuple(record[field] for field in self.key_fields)
-                    for record in self.results
-                }
-            
-            print(f"Loaded {len(self.results)} existing records from {self.output_path}")
+            try:
+                existing_df = pd.read_csv(self.output_path)
+                self.results = existing_df.to_dict('records')
+                
+                # Track completed items by key fields
+                if self.key_fields:
+                    self.completed_keys = {
+                        tuple(record[field] for field in self.key_fields)
+                        for record in self.results
+                    }
+                
+                print(f"Loaded {len(self.results)} existing records from {self.output_path}")
+            except:
+                print(f"Starting fresh - not able to read any data from existing file at {self.output_path}")
         else:
             print(f"Starting fresh - no existing file at {self.output_path}")
     
     def _save_checkpoint(self):
         """Save current results to CSV."""
-        df = pd.DataFrame(self.results)
+        print(f"Results type: {type(self.results[0])}")
+        #df = pd.concat(self.results)
+        #df = pd.DataFrame(self.results)
+        df = pd.concat(self.results, ignore_index=True)
         self.output_path.parent.mkdir(parents=True, exist_ok=True)
         df.to_csv(self.output_path, index=False)
     
@@ -112,14 +118,15 @@ class CheckpointIterator:
         for i, item in enumerate(tqdm(items_to_process, desc="Processing"), start=1):
             try:
                 # Call the user-provided function
-                result = self.process_func(item)
+                (key, records) = item
+                result = self.process_func(key, records)
                 
                 if result is not None:
                     self.results.append(result)
                     
                     # Track completion
                     if self.key_fields:
-                        key = self._get_item_key(result)
+                        #key = self._get_item_key(result)
                         self.completed_keys.add(key)
                 
                 # Periodic checkpoint
@@ -129,6 +136,7 @@ class CheckpointIterator:
             except Exception as e:
                 print(f"Error processing item {item}: {e}")
                 # Continue processing other items
+                raise e
         
         # Final save
         self._save_checkpoint()

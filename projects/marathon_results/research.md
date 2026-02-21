@@ -48,3 +48,6 @@ Questions:
 * How does the average runner do against weather (temp and precip)
 * How do top runners (10%, AG graded) do against weather?
 * How does weather hardiness change with age/sex?
+* For marathons in the spring:
+** How does performance vary by weather in the home cities (temperature, precip)
+** If a race has different dramatically different weather than the weather people train with, what is the impact?
