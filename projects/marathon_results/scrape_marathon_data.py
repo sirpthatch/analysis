@@ -21,8 +21,8 @@ import sys
 def main():
     # File paths
     races_file = 'data/races_top85.csv'
-    missing_years_file = 'data/missing_race_years_top85.csv'
-    output_file = 'data/marathon_results.csv'
+    missing_years_file = 'data/missing_race_years_test.csv'
+    output_file = 'data/marathon_results_test.csv'
 
     # Rate limiting configuration
     # Increase request_delay if you're still getting rate limited

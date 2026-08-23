@@ -19,7 +19,7 @@ def load_data():
 
     # Load featurized race data
     print("1. Loading featurized_race_data_v2.csv...", end='', flush=True)
-    featurized_df = pd.read_csv('data/featurized_race_data_v2.csv')
+    featurized_df = pd.read_csv('data/featurized_race_data_v3.csv')
     print(f" ✓ {len(featurized_df):,} records")
 
     # Load race locations
@@ -234,7 +234,7 @@ def main():
     print("Saving enriched data...")
     print("="*80)
 
-    output_file = 'data/featurized_race_data_v2_with_raceday_weather.csv'
+    output_file = 'data/featurized_race_data_v3_with_raceday_weather.csv'
     result.to_csv(output_file, index=False)
 
     print(f"✓ Saved to: {output_file}")

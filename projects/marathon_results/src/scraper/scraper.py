@@ -110,7 +110,8 @@ def _scrape_single_year(
     year: int,
     per_page: int = 100,
     request_delay: float = 0.5,
-    max_retries: int = 5
+    max_retries: int = 5,
+    start_page: int = 0
 ) -> Iterator[dict]:
     """
     Scrape race results for a single year.
@@ -140,7 +141,7 @@ def _scrape_single_year(
     }
 
     # Pagination variables
-    page = 1
+    page = start_page
     total_pages = None
     race_name = None
 

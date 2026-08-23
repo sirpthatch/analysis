@@ -21,6 +21,10 @@ class EtlModule(object):
           already written, it will skip it
     """
 
+    # Output format for partitions. Modules producing large tables should set this
+    # to "parquet" - it keeps dtypes and avoids reparsing hundreds of MB of CSV.
+    output_format: str = "csv"
+
     def partition(self, file_paths:list[Path]) -> dict[Path, list[str]]:
         """
             Should return the list of partitions that are present in the supplied
@@ -140,12 +144,14 @@ def ingest(src: Path, out: Path, name: str):
     paths_to_skip:list[Path] = []
     for path, containing_partitions in available_partitions.items():
         unwritten_partitions:list[str] = [c for c in containing_partitions if c not in existing_partitions]
+
+        print(f"For {path} containing partitions {containing_partitions}, unwritten partitions: {unwritten_partitions}")
         if len(unwritten_partitions) > 0 and not path.name.startswith("."):
             paths_to_process.append(path)
         else:
             paths_to_skip.append(path)
 
-    
+    print(f"Paths to skip: {paths_to_skip}")
     partitions_to_write = set()
     for path, containing_partitions in available_partitions.items():
         for part in containing_partitions:
@@ -176,9 +182,13 @@ def ingest(src: Path, out: Path, name: str):
         if part in existing_partitions:
             continue
 
-        output_path = out / part / "data.csv"
+        fmt = getattr(etl_instance, "output_format", "csv")
+        output_path = out / part / f"data.{fmt}"
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        frame.to_csv(output_path, index=False)
+        if fmt == "parquet":
+            frame.to_parquet(output_path, index=False)
+        else:
+            frame.to_csv(output_path, index=False)
 
     # End timing and memory tracking
     end_time = time.time()
