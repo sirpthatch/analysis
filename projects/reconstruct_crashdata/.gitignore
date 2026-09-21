@@ -27,7 +27,6 @@ data/external/*
 !data/external/.gitkeep
 
 # Article build artifacts
-article/lib/*
 !article/lib/.gitkeep
 
 # IDEs

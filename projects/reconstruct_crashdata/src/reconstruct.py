@@ -58,6 +58,28 @@ ATTRIBUTE_METRICS = {
 
 KEY = ["latitude", "longitude", "timestamp"]
 
+# NYPD precinct number -> borough. Precincts nest inside boroughs by design, so
+# this is exact, not an approximation. The 116th is Queens' newest precinct.
+PRECINCT_BOROUGH = [
+    (1, 34, "MANHATTAN"),
+    (40, 52, "BRONX"),
+    (60, 94, "BROOKLYN"),
+    (100, 116, "QUEENS"),
+    (120, 123, "STATEN ISLAND"),
+]
+
+
+def borough_for(precinct):
+    """Borough from precinct number, matching Socrata's `borough` values."""
+    try:
+        n = int(precinct)
+    except (TypeError, ValueError):
+        return pd.NA
+    for lo, hi, name in PRECINCT_BOROUGH:
+        if lo <= n <= hi:
+            return name
+    return pd.NA
+
 
 def _metric_path(metric):
     slug = metric.lower().replace(" ", "_").replace("-", "")
@@ -132,6 +154,12 @@ def build(geocode=True):
         # hour in June 2026. Kept as a column so the absence is explicit rather
         # than implied by every value reading midnight.
         "time_is_known": df.crash_datetime.dt.hour != 0,
+        "borough": df.precinct.map(borough_for),
+        # Socrata's `location` is just the coordinate pair as a tuple string.
+        "location": [
+            f"({la}, {lo})" if pd.notna(la) else pd.NA
+            for la, lo in zip(df.latitude, df.longitude)
+        ],
         "source": "trafficstat",
     })
     for col in ATTRIBUTE_METRICS.values():
@@ -140,7 +168,7 @@ def build(geocode=True):
     # null so nothing is silently invented.
     for col in ["number_of_persons_injured", "number_of_persons_killed",
                 "contributing_factor_vehicle_1", "collision_id",
-                "cross_street_name", "off_street_name", "borough"]:
+                "cross_street_name", "off_street_name", "vehicle_type_code1"]:
         out[col] = pd.NA
 
     DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
