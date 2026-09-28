@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Row-level pulls - re-created by scripts/fetch_ace.py
+data/raw/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+
+# The handoff bundle is tracked deliberately
+!research/handoff/**
+!research/*.zip

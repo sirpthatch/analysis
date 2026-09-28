@@ -1,0 +1,4 @@
+1. Profile the violations dataset (https://data.ny.gov/Transportation/MTA-Bus-Automated-Camera-Enforcement-Violations-Be/kh8p-hcbm/about_data), and create a notebook that presents the key findings.
+2. Explore the repeat offenders, determine if there is a pattern of them. In particular look if their violations are in one bus lane or many, and if you can detect a daily/periodic pattern of which lanes are violated.
+3. Generate a map that highlights the concentration in bus lane tickets - highlight the main bus routes, and put markers were the violations happen.
+4. For each camera that has sufficient history, generate a decay curve that demonstrates how violations are issued over time. This curve should have a second line that tracks repeate occurrences (something like # of tickets issued to people with more than n existing violations, where n=2 or more based on a natural cut in the data)

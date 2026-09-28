@@ -1,0 +1,5 @@
+violation_description,count,camera_type
+BUS LANE VIOLATION,715363,fixed (ACE roadside)
+MOBILE BUS LANE VIOLATION,198405,mobile (bus-mounted ACE)
+18-No Stand (bus lane),27507,officer-issued
+No Standing Bus Lane,37,officer-issued (legacy/variant label)
