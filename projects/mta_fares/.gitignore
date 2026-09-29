@@ -1,0 +1,16 @@
+# Raw and processed data are rebuilt from the live APIs — never committed.
+data/raw/
+data/processed/
+data/external/
+output/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+venv/
+.venv/
+
+# OS
+.DS_Store

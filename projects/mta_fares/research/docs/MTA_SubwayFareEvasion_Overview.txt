@@ -1,0 +1,438 @@
+MTA NYCT Subway Fare Evasion 
+Overview 
+General Description 
+The Metropolitan Transportation Authority (MTA) is a public-benefit corporation responsible for public 
+transportation in the state of New York serving 12 counties in southeastern New York, along with two 
+counties in southwestern Connecticut under contract to the Connecticut Department of Transportation 
+(CDOT). The MTA is the largest transportation network in North America. 
+Subway service within New York City is operated by MTA New York City Transit (NYCT). 
+Fare evasion occurs when passengers enter the subway system from the unpaid to the paid side by 
+interacting with fare controls in manners inconsistent with the tariff-in other words, by not paying the 
+fare. Understanding subway fare evasion is important for estimating subway ridership and gauging lost 
+revenue. The data is used regularly by NYCT’s Office of Management and Budget (OMB), and the 
+Division of Operations Planning (OP). 
+The fare evasion rate is calculated systemwide and is estimated quarterly for the subway with a margin 
+of error. The fare evasion rate is the estimated percentage of riders who illegally enter the system. It is 
+estimated using surveys conducted by traffic checkers and by applying stratified sampling.  
+The fare evasion rate began being publicly reported in MTA Board meeting materials in April 2019. 
+This dataset was published during the first phase of the MTA’s commitment to increasing transparency. 
+We continually examine all our published and publishable data with a view to both providing datasets 
+that can be effectively utilized by our customers and the public at large, and to providing regular, 
+automated updates to these datasets efficiently and sustainably. Consequently, this dataset may be 
+restructured and/or combined with other similar datasets in the future. 
+Data Collection Methodology 
+The fare evasion rate is estimated using a statistical survey, which is a study that obtains or records data 
+from a subset of a population in order to estimate attributes of the entire population. A survey is used 
+since it is unfeasible to have traffic checkers survey every fare control area in a station, and at all times 
+of day. Though the sample only consists of about 0.03 percent of the 2.1 million combinations per 
+quarter of unique control areas (970) and unique hours (2,160), the statistical techniques are designed 
+to ensure that the sample accurately estimates the fare evasion rate for the whole system. 
+Surveys only produce point estimates of the true population value, which is unknowable without doing 
+an impossible 100 percent sample, and even then, the results would be subject to data collection errors. 
+To address the statistical uncertainty of a sample estimate, a margin of error is calculated using a 
+formula based on the type of sample, sample size, and variance within the survey result. The error 
+margin is then used to provide a confidence interval around the point estimate – in this case tied to a 95 
+percent confidence level. This margin of error conveys how far away the surveyed result is likely to be 
+from the true population value given the limited number of samples. 
+The surveys that traffic checkers take of fare evasion at selected fare control areas and at specific times 
+are designed to be representative of the fare evasion rate for the entire system and at all times of day. 
+While checkers will inevitably miss some fare evaders due to the limits of human observers, the fare 
+evasion rate should be accurate. 
+The current method for measuring fare evasion in the subway was developed with assistance from 
+Columbia University data analytics professor Dr. Kitty Kay Chan and the Office of the MTA Inspector 
+General and was first used in Q1 2021, with a slight change made in Q4 2023. This method is not apples-
+to-apples comparable to the previous rates calculated using the previous methodology, though a 
+dramatic change in the estimated rate due to the methodology change was not expected. Since this 
+dataset includes data back to Q1 2018, before the change in methodology, this document will detail the 
+methodologies for both approaches, note the differences between them, and changes made in 2019 to 
+improve the previous approach.  
+The fare evasion rate is not reported at the station level given the very limited sample size, and since 
+most fare control areas are not surveyed each quarter. 
+The current approach uses stratification and weighting since it is believed to produce more robust 
+estimates of fare evasion that are less susceptible to the variability of simple random sampling. 
+The methodology for the current approach to calculating fare evasion is detailed below: 
+Sample Generation 
+Obtaining paid entry data 
+The first step is to obtain a list of paid entries at each fare control area (FCA), which is a grouping of 
+turnstiles, High Entry Exit Turnstiles (HEETS), and service gates, in each hour of each day of the first 
+month of the prior quarter for which the sample is to be generated, from ridership data. Before Q3 2023 
+this data was provided by the Office of Management and Budget (OMB). A station may have multiple 
+FCAs. This data is associated with three day types (Weekday, Saturday, Sunday) to capture different 
+ridership patterns on different days of the week. Since ridership is fairly consistent during the week, only 
+averaging weekday data, rather than averaging specific days, allows more flexibility for scheduling 
+without losing too much accuracy. Since this data will initially include only one record for an average 
+weekday, the weekday records will be repeated four additional times for a final population of FCA-hour 
+combinations. This will better reflect reality (1 Saturday/1 Sunday/5 Weekdays per week). 
+Excluding combinations 
+This list of combination of FCA-hour type combinations is then updated for permanent and long-term 
+closures of FCAs. FCAs used for special events, and FCA-hour types with zero entries for the full first 
+month of the previous quarter are exclude. In addition, combinations between 11 p.m. and 6 a.m. are 
+excluded since these hours comprise a very small percentage of overall ridership, and to allow for 
+sensible scheduling with our traffic checker department. We believe that little accuracy is sacrificed by 
+excluding overnight hours from the sample. For Q1 and Q2 2021, combinations between 10 p.m. and 7 
+a.m. were excluded due to the 1 a.m. to 5 a.m. overnight subway closure and a travel buffer to allow 
+checkers to get to and from assignments. 
+Stratification 
+Fare evasion is measured using stratification, which divides the population of FCA-hour combinations 
+into subgroups (strata) according to characteristics deemed significant and/or for which separate results 
+are desired, which is total paid ridership. A statistical requirement for stratification is that the members 
+of each stratum be relatively homogenous. Previous surveys found that fare evasion rates and FCA 
+entries during the sample period are inversely related. As such, the strata are based on ridership to 
+group FCA-hour units with more similar fare evasion behavior together. 
+Since fare evasion is measured using a stratified sample, the FCA-hour type combinations are split 
+among six strata based on Automated Fare Collection paid ridership totals from turnstiles, defined as 
+consisting of equal proportions of total paid ridership. Ridership is highly variable across stations, and 
+within a station-across time and FCAs. By stratifying in this way, more surveys are conducted within low-
+ridership parts of the system that have higher variance in measured fare evasion rates, which serves to 
+reduce the statistical uncertainty of the overall, system-wide fare evasion estimate. 
+Each FCA-hour type combination, which is a sampling unit (also known as a cluster), is assigned to one of 
+the six strata based on its total paid entries using the data obtained from ridership data. 
+Determining the number of surveys 
+The total number of surveys to be completed in a quarter is based initially on typical quarterly 
+completion rates and checker availability. Based on past averages, the expected number of completed 
+surveys per quarter is 490. Assuming an 80 percent completion rate, the total number of surveys that 
+will be chosen for the quarter is 612. Completed surveys are monitored to ensure they are free from 
+observational and data entry error. 
+Determining the number of surveys in each stratum 
+The method used to determine the number of surveys in each stratum was revised in Q4 2023. Both 
+methods are detailed here. 
+Method from Q4 2023 to present 
+The number of surveys assigned to each stratum is determined using this algebraic formula, which 
+works regardless of how many surveys are assigned to each stratum, meaning it can handle 
+disproportionate sampling): 
+𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆 𝑊𝑊𝑊𝑊𝑊𝑊𝑊𝑊ℎ𝑆𝑆  =  
+1
+�6  ×  (1  −  𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆 𝐹𝐹𝐹𝐹)�
+∑ 1
+�6  ×  (1  −  𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆 𝐹𝐹𝐹𝐹)�
+  
+ 
+A factor was calculated by dividing the targeted monthly surveys by the total number of eligible FCA-
+hour type combinations and multiplying the result by the number of months in the period. Then the 
+number of FCA-hours types assigned to each stratum was multiplied by this factor to get the survey 
+distribution.  
+For example, based on October 2020 paid entry data, the strata boundaries and distribution of surveys 
+are:   
+Strata 
+Lower 
+Bound 
+Upper 
+Bound 
+# of FCA-Hour- Day 
+Type Combos # of Surveys 
+1 ≥ 1 < 70 217,204 329 
+2 ≥ 70 < 118 74,167 112 
+3 ≥ 118 < 177 48,152 73 
+4 ≥ 177 < 260 32,015 49 
+5 ≥ 260 < 417 21,133 32 
+6 ≥ 417 < 2000 10,991 17 
+Total     403,662 612 
+ 
+In this case, the factor is: (204/403,662) * 3 = 0.001516, where 204 is the monthly targeted number of 
+surveys, 403,662 the number of eligible FCA-hours in October, and three is the number of months in the 
+quarterly sample period. 
+Method between Q1 2021 and Q3 2023 
+Between Q1 2021 and Q3 2023, a different formula was used to assign the number of surveys to each 
+stratum. The surveys were assigned proportionately to a stratum’s total number of entries. 
+Each survey had the weight of: 
+𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆 𝑊𝑊𝑊𝑊𝑊𝑊𝑊𝑊ℎ𝑆𝑆  = 𝑇𝑇𝑇𝑇𝑆𝑆𝑆𝑆𝑇𝑇 𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆 𝐹𝐹𝐸𝐸𝑆𝑆𝑆𝑆𝑊𝑊𝑊𝑊𝐸𝐸 (𝑓𝑓𝑆𝑆𝑇𝑇𝑓𝑓 𝐸𝐸𝑠𝑠𝑆𝑆𝑠𝑠𝑊𝑊𝑠𝑠𝐸𝐸)
+∑ 𝑇𝑇𝑇𝑇𝑆𝑆𝑆𝑆𝑇𝑇    𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆𝑆 𝐹𝐹𝐸𝐸𝑆𝑆𝑆𝑆𝑊𝑊𝑊𝑊𝐸𝐸 (𝑓𝑓𝑆𝑆𝑇𝑇𝑓𝑓 𝐸𝐸𝑠𝑠𝑆𝑆𝑠𝑠𝑊𝑊𝑠𝑠𝐸𝐸) 
+Survey assignment was updated slightly in Q4 2023 to use disproportionate sampling. This is a type of 
+stratified sampling in which the size of the sample from each stratum is not in proportion to the size of 
+that stratum in the total population. This method allows an arbitrary number of surveys to be assigned 
+to any strata while still generating a statistically valid estimate of fare evasion. 
+The use of disproportional sampling was made necessary by the Agency’s need to better understand 
+fare evasion at busier stations without requiring additional surveys. Using disproportional sampling, 
+busier stations could be more heavily sampled in a manner that further improves confidence in the 
+system-wide Fare Evasion estimate, and weekend samples could be reduced to accommodate staff 
+limitations without interrupting the statistical validity of the system-wide estimate. 
+Randomly choosing a sample 
+Each quarter, and for each of the six strata defined in the previous step, a sample is randomly pulled 
+from the up-to-date population of FCA-hour type combinations, with a total number of surveys chosen 
+corresponding to the number of FCA-hour types assigned to each stratum in the previous step. 
+Scheduling tasks 
+Schedule surveys 
+Operations Planning (OP) schedules surveys to match the samples, given available traffic checker 
+resources. Each sample is completed only once per quarter. If the same FCA-hour-weekday combination 
+appears multiple times in a sample, it should be done on a different day. 
+Reschedule surveys 
+OP staff regularly review which surveys were not completed so they can be rescheduled for another 
+chance at completion during the quarter. They check that the surveys that are completed are reassigned 
+to the same stratum, day, and FCA. 
+Completion of surveys 
+A group of ten traffic checkers goes to the appropriate FCAs at the assigned times and days and 
+complete the surveys. They use an iPad app, or paper if there are technical issues with the device, to 
+note how many individuals illegally entered through the fare gates over the course of an hour. Traffic 
+checkers record every entry type they notice. The list of types of entries is legal (paid, authorized, school 
+groups or children under 44 inches), illegal (High Entry/Exit Turnstile bump, swipe seller or open the 
+gate) and questionable entries. Questionable evasion is when it is unclear if the person paid or needed 
+to pay. including people entering with a gate key or wearing an official uniform, such as a police officer 
+or person wearing an MTA vest. Checkers should survey from unpaid area unless their view is 
+obstructed. 
+Evasion calculation 
+This section provides details on how the systemwide fare evasion estimate has been calculated since Q1 
+2021. For details on how fare evasion was calculated between 2018 and Q4 2020, look at the section on 
+the previous methodology. 
+Survey results assigned to strata 
+This first step stopped being done after Q3 2023, to allow for a greater number of surveys to be 
+measured at busy station complexes (also known as “disproportionate sampling”). Results were 
+assigned to strata based on actual paid and illegal entries for each FCA survey hour, including FCA-hour 
+combinations that reported no paid ridership. Since actual ridership for specific FCA-hour combinations 
+often differed from the historic ridership for these combinations obtained from OMB, some surveys 
+were reassigned to new strata. This process created six strata that were almost equally weighted by 
+total entries (paid and unpaid ridership) with no overlap. 
+Calculating the evasion rate 
+The evasion rate and margin of error is then calculated within each stratum. The sampling unit for the 
+calculations is an individual survey done by a traffic checker, which is also known as a cluster, which is a 
+specific FCA-hour combination, and the elementary unit is a person entering the system. 
+The evasion rate within an individual stratum is calculated as the summation of the number of selected 
+persons with the attribute of interest (illegal entries) in a specific cluster divided by the number of total 
+selected persons or entries (legal + questionable + illegal) for that specific cluster. These calculations are 
+done using the following formulas: 
+𝑝𝑝𝑠𝑠 = � 𝑆𝑆𝑠𝑠𝑠𝑠
+𝑓𝑓𝑠𝑠𝑠𝑠
+𝑁𝑁
+𝑠𝑠=1
+ 
+𝑓𝑓𝑠𝑠𝑠𝑠 = 𝐿𝐿𝑠𝑠𝑠𝑠 + 𝑄𝑄𝑠𝑠𝑠𝑠 + 𝑆𝑆𝑠𝑠𝑠𝑠 
+The margin of error for a specific stratum is calculated with a 95 percent confidence level using the 
+formula for the confidence interval of a proportion, which is the z-score for the 95 percent confidence 
+level (1.96) multiplied by the square root of the variance of the proportion of illegal entries to total 
+entries across clusters in the stratum, or the fare evasion rate, (v(ps)). The numerator for the variance of 
+the proportion is the summation of the number of selected persons with the attribute of interest (illegal 
+entries) in a specific cluster subtracted by the evasion rate for that stratum multiplied by the number of 
+total selected persons or entries (legal + questionable + illegal) for the specific cluster to the second 
+power. The denominator for the variance of the proportion is the number of sampled clusters multiplied 
+by the number of sampled clusters minus 1 multiplied by the average number of selected persons 
+(entries) per cluster to the second power. These calculations are done using the following formula:  
+𝑀𝑀𝐹𝐹𝑠𝑠 = 1.96�𝑠𝑠(𝑝𝑝𝑠𝑠) = 1.96�∑ (𝑆𝑆𝑠𝑠𝑠𝑠 − 𝑝𝑝𝑠𝑠𝑓𝑓𝑠𝑠𝑠𝑠)2 𝑁𝑁
+𝑠𝑠=1
+𝐸𝐸𝑠𝑠(𝐸𝐸𝑠𝑠 − 1) 𝑓𝑓�𝑠𝑠2  
+Where: 
+asi is the number of illegal entries in sampled cluster i, stratum s 
+msi is the number of entries in sampled cluster i, stratum s 
+Lsi is the number of legal entries in sampled cluster i, stratum s  
+Qsi is the number of questionable entries in sampled cluster i, stratum s 
+v(ps) is the variance of ps 
+ps is the proportion of total number of illegal entries to total entries across 
+sampled clusters in stratum s 
+𝐸𝐸𝑠𝑠 is the number of sampled clusters in stratum s 
+𝑓𝑓�𝑠𝑠 is the average number of entries per sampled cluster in stratum s 
+Weighing results for each stratum 
+The systemwide evasion rate and margin of error are then obtained by averaging the stratum-level 
+averages calculated in the previous step, with each stratum weighted equally by its estimated 
+proportion of total ridership. In this case, total ridership includes both legal, questionable, and illegal 
+entries, which is obtained by scaling up stratum-level paid entries by the strata’s estimated evasion rate 
+for the quarter. 
+The number of illegal and questionable entries for each stratum are totaled and divided by the total 
+number of entries in that stratum to obtain the non-payment rate for that stratum. The total number of 
+legal entries (swipes) at all the FCA-hour combinations in that stratum (not just those randomly selected 
+to be surveyed) is divided by 1 minus the non-payment rate for that stratum to obtain the total number 
+of estimated entries (legal + questionable + illegal) for each stratum. 
+Next, this total number of entries for each specific stratum is divided by the sum of total strata entries 
+for all six strata, which will be the weight for each stratum. The systemwide evasion rate is obtained by 
+summing up the weight for each stratum multiplied by the fare evasion rate for each stratum. This 
+equation is seen here. 
+𝑝𝑝 = � 𝑊𝑊𝑠𝑠𝑝𝑝𝑠𝑠
+𝑆𝑆
+𝑠𝑠=1
+ 
+The systemwide margin of error is calculated with a 95 percent confidence level using the formula for 
+the confidence interval of a proportion but modified to weight the margins of error for the six strata. 
+This formula is the z-score for the 95 percent confidence level (1.96) multiplied by the square root of the 
+summation of the share of entries in the system that are in a specific stratum multiplied by the variance 
+of the proportion of illegal entries to total entries across clusters in the stratum, or the fare evasion rate, 
+(v(ps)). 
+These calculations are done using this formula: 
+𝑀𝑀𝐹𝐹 = 1.96�� 𝑊𝑊𝑆𝑆
+2𝑠𝑠(𝑝𝑝𝑠𝑠)
+𝑆𝑆
+𝑠𝑠=1
+ 
+  Where: Ws is the share of entries in the system that are in strata s   
+Previous methodology 
+This section details the methodology used to calculate the fare evasion rate between 2009 and Q4 2020, 
+and briefly touches on the approach used before 2009. In Q4 2018, changes were made to how the 
+margin of error was calculated, and in July 2019, several modifications were made to the survey process. 
+Before 2009 
+Before Q1 2021, a different method was used to calculate systemwide fare evasion. This method, first 
+used in 2009, replaced the measurement of fare evasion by station agents, who counted evaders for one 
+day a month to calculate a systemwide evasion rate. Station agent counts were factored up by 35 
+percent to account from undercounting expected by this methodology. The data were not 
+independently verifiable. Since station agents had other duties while being in the token booth (selling 
+MetroCards, providing rider information), distracted clerks could easily miss a few fare evaders. At the 
+same time, with decreasing agent positions, fewer control areas were covered. A 2008 pilot study that 
+measured fare evasion at randomly selected fare control areas found that the overall fare evasion rate 
+was six times the station agent rate-2.1 percent, as opposed to 0.32 percent. In 2008, a new 
+methodology was developed to calculate fare evasion using stratification parameters determined by 
+two pilots from that year that found that passenger entry rates and adjacent neighborhood income 
+levels correlated most strongly with fare evasion observed. This method began to be formally used in 
+2009. 
+2009 to Q4 2020 
+The sample for fare evasion was based on a random sample of FCA-hour combinations, stratified by 
+average hourly ridership. OMB sent OP a file with the average ridership based on a year of data for 
+every hour of the day at each FCA, separated into weekday, Saturday, and Sunday categories. The 
+combinations were sorted by day type and the number of swipes in descending order. Any rows with 
+fewer than 10 entries in an hour and exit-only control areas were removed, as were FCAs used for 
+events. 
+The total number of rows was then divided by the number of strata to find the number of FCA-hour 
+combinations in each stratum. 40 strata were used, which corresponded to 40 buckets. Initially, there 
+were two median income brackets by 20 ridership strata. The FCA-hour combinations with highest 
+ridership would be in the first bucket, with the next ones in the following bucket, and so on. With each 
+row having a bucket number, the order of rows inside a bucket was randomized. Each quarter, a new 
+sample was pulled from the buckets, starting with the first unused row. The number of rows pulled from 
+each bucket, or strata, is 5 for weekdays, 1 for Saturday, and 1 for Sunday, which added up to 280 
+surveys in each sample set for a given quarter (40 each for Saturday and Sunday, and 200 for weekdays), 
+with equal representation from each of the buckets. This was designed to ensure there was a mix of high 
+and low ridership FCAs in each quarterly sample. Weekday type samples are drawn five times more than 
+Saturday or Sunday to keep the sample balanced. 
+After the sample set for a given quarter was generated, during the first week weeks of the last month of 
+a quarter, an analyst in OP looked through and removed any long-term closures from the sample. 
+Surveys were assigned to checkers based on their work schedule. Like the current process, checkers 
+measured evasion using categories using tablets, or paper as a backup. However, they did so for 30 
+minutes within a 1-hour period they were assigned. A checker was expected to do three checks a day, 
+spread across three boroughs when feasible. 
+Since checkers observed clusters of riders at selected FCAs in selected hours, the evasion rate was 
+calculated as a cluster sample proportion. The sampling unit was a FCA-hour combination, and the 
+elementary unit was a person entering the system. Like the current methodology, the evasion rate is 
+calculated based on evasion as observed by traffic checkers and paid ridership data during the same 
+time period. 
+This is the sample proportion used to calculate the fare evasion rate. In the equation, 𝑝𝑝 is the proportion 
+of riders evading the fare, 𝐸𝐸 is the number of clusters (surveys [4Q 2018 to 4Q 2020] or buckets [2009 to 
+3Q 2018]), 𝑓𝑓𝑠𝑠 is the number of entries the checker observes in each cluster for 4Q 2018 to 4Q 2020 or 
+the total entries observed by checkers for FCA-hours in each bucket for 2009 to 3Q 2018, 𝑊𝑊,𝑆𝑆𝑠𝑠𝑖𝑖 is the 
+evader status of person 𝑊𝑊, 𝑗𝑗 (0 or 1) and 𝑓𝑓𝑠𝑠𝑖𝑖 is the existence status of person 𝑊𝑊, 𝑗𝑗 (0 or 1). This is an 
+unsimplified version of the same equation used to obtain the fare evasion rate for each stratum under 
+the current method. The difference is that this equation is only calculated once-for all the data in all the 
+strata-there are not separate calculations for each stratum which are then averaged using weights. 
+𝑝𝑝 =
+∑ ∑ 𝑆𝑆𝑠𝑠𝑖𝑖
+𝑚𝑚𝑖𝑖
+𝑖𝑖=1
+𝑛𝑛
+𝑠𝑠=1
+∑ ∑ 𝑓𝑓𝑠𝑠𝑖𝑖
+𝑚𝑚𝑖𝑖
+𝑖𝑖=1
+𝑛𝑛
+𝑠𝑠=1
+, 
+Margin of Error: 4Q 2018 to 4Q 2020  
+This margin of error formula multiplied the z-score for the 95 percent confidence level (1.96) by the 
+square root of the variance of the proportion of illegal entries to total entries across sampled clusters, or 
+the fare evasion rate, (v(p)). This formula is almost completely identical to the one currently used, 
+except for the fact that it is done for all data and is not done for each stratum and then averaged using 
+weights. 
+𝑀𝑀𝐹𝐹 = 1.96�𝑠𝑠(𝑝𝑝) = 1.96�∑ (𝑆𝑆𝑠𝑠 − 𝑝𝑝𝑓𝑓𝑠𝑠)2𝑛𝑛
+𝑠𝑠=1
+𝐸𝐸(𝐸𝐸 − 1)𝑓𝑓� 2  
+Where: 
+ai is the number of illegal entries in sampled cluster i 
+mi is the number of entries in sampled cluster i 
+v(p) is the variance of p 
+p is the proportion of total number of illegal entries to total entries across 
+sampled clusters 
+𝐸𝐸 is the number of sampled clusters 
+𝑓𝑓� is the average number of entries per sampled cluster 
+Margin of Error: 2009 to 3Q 2018 
+Before Q4 2018, a different equation was used to calculate the margin of error at a 95 percent 
+confidence level. With this formula, the buckets were the clusters, not the individual surveys for a 
+specific FCA-hour combination. The numerator for the variance in the formula is the summation of the 
+proportion of persons with the attribute of interest (illegal entries) in the bucket (the fare evasion rate) 
+subtracted by the fare evasion rate for all buckets to the second power. The denominator was the 
+number of buckets multiplied by the number of buckets to the second power. These calculations were 
+done using the following formula:  
+𝑀𝑀𝐹𝐹 = 1.96�𝑠𝑠(𝑝𝑝) = 1.96�∑ (𝑝𝑝𝑠𝑠 − 𝑝𝑝)2𝑛𝑛
+𝑠𝑠=1
+𝐸𝐸(𝐸𝐸 − 1)  
+Where: 
+v(p) is the variance of p 
+p is the proportion of total number of illegal entries to total entries across all 
+buckets (the fare evasion rate for all buckets) 
+pi is the proportion of total number of illegal entries to total entries across 
+bucket I (the fare evasion rate for the bucket) 
+𝐸𝐸 is the number of buckets 
+ 
+Descriptions of methodology changes  
+At some point, in an effort to improve accuracy, OP began treating the sampling unit of a FCA-hour as a 
+cluster for statistical purposes since it was thought that it would provide a more cost-effective and 
+accurate estimate of fare evasion. 
+As part of the changes made between Q4 2018 and Q1 2021, areas with fewer than ten swipes per hour 
+were no longer excluded from being sampled. In addition, the hours that FCAs were surveyed on 
+weekends were adjusted from 6 a.m. to 11 p.m. to being 5 a.m. to 11 p.m.. 
+Margin of error change in Q4 2018 
+Several years later, OP revised the margin of error calculation for fare evasion as of Q4 2018 from being 
+a simple random sample to being treated as a one-stage clustered random sample. Cluster samples 
+divide a population into groups, and selects the groups at random, and gathers data from every subject 
+within that cluster, unlike stratified random samples, which randomly chooses some subjects from every 
+group. Each survey, or FCA-hour combination, would be treated as a cluster, instead of buckets, which 
+would be ignored, for the MOE calculation. This change widened the margin of error. 
+The change was made since OP had begun to consider that it would be more appropriate to assume that 
+the proportion of evaders is clustered rather than uniform, an assumption of the binomial distribution, 
+which had been used to represent fare evasion in the methodology. Binomial distributions are used to 
+estimate the probable outcomes of a series of events when each event has two possible outcomes. They 
+are based on assumptions that are questionable when applied to fare evasion, such as the 
+independence of each event, since it is likely that passenger decisions are influenced by the behaviors of 
+other passengers. The initial methodology had assumed observations to be independent, even though 
+that was not strictly true. In addition, the sampling plan had selected every cluster in the population, 
+which is what cluster sampling seeks to avoid, and the formula that had been used also did not account 
+for the fact there were different numbers of people in each bucket. 
+Process changes in July 2019 
+In July 2019, a series of changes was made to address concerns about the process for obtaining the data 
+raised during the methodology review with Columbia University and the MTA Office of the Inspector 
+General. These changes took effect with the Q3 2019 data and could explain part of the increase in 
+reported subway fare evasion-with fewer fare evaders missed. 
+The MTAIG had found that only 60 percent of surveys for the six quarters through the end of 2018 were 
+completed, and wondered what the impact of the shortfall of completion surveys was on the accuracy 
+of the fare evasion calculation. To increase the number of surveys completed, several changes were 
+made. Traffic checkers previously had limited availability. Subway traffic checkers were part of the 
+Passenger Environment Survey (PES) checker group and spent most of their time there. Traffic checkers 
+often could not be substituted for in their absence. A position could not be filled until the following pick 
+if a checker left the job or was out-long term; this had a direct impact on the number of completed 
+checks. Bus and subway checkers were combined into one dedicated and coordinated unit, increasing 
+the number of available checkers, and allowing them to be moved around between modes depending 
+on sampling needs. Subway checkers would be taken out of uniform; they previously had been in 
+uniform while doing surveys since they also had other responsibilities in the PES group. 
+Schedulers would begin to assign checkers to multiple nearby locations, instead of being spread out, 
+reducing the proportion of the time that checkers needed to travel between observation locations. The 
+requirement that checkers visit three boroughs per day would be relaxed to only require them to visit 
+two boroughs a day to improve efficiency. These changes enabled a doubling of observation time from 
+30 to 60 minutes. This reduced the needed number of checks to obtain the same level of precision, and 
+increased the number of checks performed each month with resources reallocated. 
+Categories on the surveys were simplified, eliminating unnecessary distinctions, such as whether 
+evasion through a gate was deliberate or opportunistic. This would allow checkers to concentrate more 
+on quantifying evasion instead of trying to discern a particular evader’s behavior. 
+Previously, at FCAs with multiple exits, checkers were instructed to observe all gates within their 
+assigned FCA. However, observing more than one at a time could be challenging at times, meaning they 
+could miss many evaders. An expanded list of fare control areas that split out over a hundred additional 
+control areas was created. It accounted for recent construction, and feedback from checkers and their 
+supervisors. The split-up control areas allowed checkers to monitor smaller areas, and thus be better 
+positioned to get better sightlines at stations to collect more accurate data. Finally, checkers were 
+trained or retrained on standard practices, the number of supervisors assigned to evasion was increased 
+from 1 to 3 (it increased to 4 in September 2019), and automated reports were created to flag results for 
+quality assurance. 
+Q1 2021 methodology changes 
+The Q1 2021 methodology changes were developed with assistance from Columbia University data 
+analytics professor Dr. Kitty Kay Chan and the Office of the MTA Inspector General. The change reduced 
+the number of strata from 40 to 6. FCA-hour combinations would no longer be divided equally among 
+the strata; instead, they would be divided so each strata had equal levels of ridership, meaning there 
+would be different numbers of combinations in each stratum. 
+While the previous approach used strata to obtain a more accurate sample by ensuring there were 
+enough surveys in areas with different levels of ridership by organizing FCA-hour combinations by 
+ridership, dividing them equally into 40 strata, and randomly choosing some combinations, they did not 
+weigh and average the fare evasion rates of the various strata. With the Q1 2021 changes, the fare 
+evasion rate and margin of error would be calculated for each stratum and would then be averaged 
+using weights. This change meant that the methodology would no longer consist of a hybrid method, 
+which combined elements of different sampling techniques. FCA-hours would be kept as clusters for the 
+calculation of the margin of error. Another change is that the ridership data used to assign FCA-hours to 
+strata for survey assignment would now be from each hour of each day of the first month of the first 
+month of the prior quarter as opposed to being from the previous year of data. 
+Statistical and Analytic Issues 
+Surveys conducted by traffic checkers using their best judgement to count and classify entries, therefore 
+human error may take place. Data is available starting in 2018. Fare evasion was not measured for Q2 
+2020 due to the COVID-19 pandemic. 
+Limitations of Data Use 
+There are no limitations on the data at this time. 
+Release Notes 
+Version 1.0.0 release notes instituted with documentation updates (03/13/2025) 
+ 

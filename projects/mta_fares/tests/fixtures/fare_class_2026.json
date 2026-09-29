@@ -1,0 +1,42 @@
+[
+  {
+    "fare_class_category": "Metrocard - Fair Fare",
+    "sum_ridership": "3.0"
+  },
+  {
+    "fare_class_category": "Metrocard - Full Fare",
+    "sum_ridership": "55699.0"
+  },
+  {
+    "fare_class_category": "Metrocard - Other",
+    "sum_ridership": "205082.0"
+  },
+  {
+    "fare_class_category": "Metrocard - Seniors & Disability",
+    "sum_ridership": "4665.0"
+  },
+  {
+    "fare_class_category": "Metrocard - Unlimited 30-Day",
+    "sum_ridership": "34.0"
+  },
+  {
+    "fare_class_category": "OMNY - Fair Fare",
+    "sum_ridership": "2426999.0"
+  },
+  {
+    "fare_class_category": "OMNY - Full Fare",
+    "sum_ridership": "48900551.0"
+  },
+  {
+    "fare_class_category": "OMNY - Other",
+    "sum_ridership": "2345608.0"
+  },
+  {
+    "fare_class_category": "OMNY - Seniors & Disability",
+    "sum_ridership": "3394573.0"
+  },
+  {
+    "fare_class_category": "OMNY - Students",
+    "sum_ridership": "1571206.0"
+  }
+]

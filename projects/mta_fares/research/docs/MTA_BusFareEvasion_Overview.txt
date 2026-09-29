@@ -1,0 +1,485 @@
+MT A Bus Fare Evasion 
+Overview 
+General Description 
+The Metropolitan Transportation Authority (MTA) is a public-benefit corporation responsible for public 
+transportation in the state of New York serving 12 counties in southeastern New York, along with two 
+counties in southwestern Connecticut under contract to the Connecticut Department of Transportation 
+(CDOT). The MTA is the largest transportation network in North America. 
+Bus service within New York City is operated by MTA agencies New York City Transit (NYCT) and MTA 
+Bus Company (MTABC). 
+The bus fare evasion (BFE) rate is the estimated percentage of riders who illegally board buses. 
+Understanding BFE is important for estimating bus ridership and gauging lost revenue. The data is used 
+regularly by NYCT’s Office of Management and Budget (OMB), and Division of Operations Planning (OP). 
+Since Q4 2020, the BFE rate has been estimated using Automated Passenger Counter (APC) and 
+Automated Fare Collection (AFC) data. Until Q1 2020, fare evasion was estimated using surveys 
+conducted by traffic checkers, with fare evasion on Select Bus Service (SBS) routes, except the S79, being 
+estimated based on data from enforcement surges by the EAGLE Team. Fare evasion was not reported 
+in Q2 or Q3 2020, as checkers were not deployed due to the COVID-19 pandemic. 
+The BFE rate began being publicly reported in MTA Board meeting materials in April 2019. This dataset 
+includes the rate for local and limited-stop (LCL/LTD) buses, Select Bus Service (SBS) buses, express (EXP) 
+buses and the systemwide total. 
+This dataset was published during the first phase of the MTA’s commitment to increasing transparency. 
+We continually examine all our published and publishable data with a view to both providing datasets 
+that can be effectively utilized by our customers and the public at large, and to providing regular, 
+automated updates to these datasets efficiently and sustainably. Consequently, this dataset may be 
+restructured and/or combined with other similar datasets in the future. 
+Data Collection Methodology  
+Current Methodology 
+The current methodology estimates the BFE rate using APC and AFC data, including from SBS sidewalk 
+vending machines. Unlike previous methods, it is calculated based on actual data, not a survey. 
+Processing APC data 
+APCs are infrared sensors mounted above each door on a bus that record the number of boardings and 
+alightings each time that doors open and close. Validation efforts have showed APC counts were correct 
+within +/- 1 passenger at 99 percent of stops when comparing manual observations of video recordings. 
+Not all buses are equipped with APCs, and this coverage also varies by borough. All new buses are 
+equipped with APCs; coverage should increase as old buses are retired or retrofitted with readers. 
+APC records also include the bus id, a timestamp, and a GPS ping for the geolocation. This data is written 
+from the buses to a production database, which usually happens in real-time. If the bus is out-of-
+network, it may wait until it arrives back at the depot to do a bulk upload using depot WiFi. 99.8 percent 
+of APC data is available by end of day. 
+Each morning, OP gets stop-level data from APCs for the previous day, and an automated procedure 
+aggregates the data into bus trips. Bus trips are defined by the first APC boarding and the last APC 
+alighting. In order to better define comparisons to AFC data, nearby trips are grouped together into 
+blocks. Trips are grouped together into blocks if there are fewer than 15 minutes between the end of 
+one trip and the start of the next trip on a given bus. This is done since riders may board during one trip 
+then alight during the next. Without grouping, both trips are imbalanced, with the first trip having one 
+additional boarding, and the second having an additional alighting. 
+The process also indicates which trips are unbalanced (have a large difference between the numbers of 
+ons and offs on each trip). The process compares the number of balanced APC trips from the previous 
+month with the total number of trips that ran based on processed BusTime data. Data from routes with 
+less than one percent APC coverage were filtered out until 2024 due to some changes in the process, 
+which are detailed below. 
+Processing AFC data 
+MetroCard transactions and OMNY tabs data is obtained from ridership data. Data comes in each 
+morning with yesterday's numbers. Before Q2 2024, this data was provided by the Office of 
+Management and Budget (OMB). Data had come with a six-week lag, and OP generated preliminary 
+numbers for a given month about 10 to 20 days after the end of the month. At that time, the numbers 
+from the previous month were finalized. 
+For each block, the process counts and matches OMNY and MetroCard fare data with APC boardings in 
+the same time interval for the trip, with a buffer of seven minutes added at the start of the interval and 
+a buffer of one minute added to the end of it. While OMNY data timestamps are rounded down to the 
+nearest second, MetroCard data can only be rounded down to the nearest six-minute interval. The time 
+before and after the start of the trips helps account for this rounding, and any time synchronization 
+issues between the AFC/OMNY and APC systems.  
+An estimated percentage of riders paying in cash is also included to determine a route’s total paid 
+ridership. Cash data is first taken from data collected by fareboxes. It is collected by the farebox in a trip 
+record file separate from MetroCard data that does not retain each transaction, but summarizes it into 
+loosely defined trips, though this has proved to be unreliable. These loosely defined trips are therefore 
+not used to distribute the payments, and instead cash data is aggregated at the depot level. Cash data 
+contains both the count of riders boarding with cash and revenue from these transactions, and includes 
+different fare types, including reduced and full fares. Since cash is received on 15th or 16th of each 
+month, the previous month’s numbers are used prior to that. Cash payments vary by less than 0.5 
+percent. 
+Split fare boardings are captured via MetroCard data, while cash short-drop boardings are determined 
+by applying a blended fare derived from the share of full and reduced fares in total cash boardings. This 
+blended fare was calculated in 2015 separately for NYCT and MTA Bus using data from 2014, with the 
+share of revenue from reduced fares being 8.1 percent for NYCT, and 11.5 percent for MTA Bus. This 
+base cash data-both boardings and revenue-is gathered at the depot level, and for each depot, it is 
+multiplied by the ratio of the actual cash collected to the amount that the data file reported. 
+To distribute cash ridership from the depot level to the route level, the estimated ratio of cash ridership 
+for each route at the depot, based on older OP fare evasion surveys, is used. In these fare evasion 
+surveys, short-drop riders were counted as fare evaders. 
+Later, during the BFE calculation, to obtain total paid ridership, the percentage of riders on each bus 
+route paying in cash, the cash rate, is calculated. It is calculated as actual cash divided by cash fare. Since 
+this cash ridership figure includes revenue from partially paid boardings, or short-drop fares, this 
+formula counts short-drop riders as equal to a much-reduced number of effective full fare riders. Since 
+the bus fare evasion surveys used to distribute cash ridership from depots to bus routes counted short-
+drop riders as fare evaders, and the BFE calculation counted short-drop riders as partial riders, there is a 
+small double-counting when including effective paid riders.  
+The APC data distributed short-drop riders between the paid and fare evader category based on 
+effective payment, with short-drop MetroCard fares being included as paid riders, while short-drop cash 
+fares were included as evaders.  
+APCs are not able to count children under 44 inches tall, are not able to differentiate between short-
+drops and valid fares, and cannot distinguish authorized nonpayment, which include questionable or 
+legal boarding without a fare paid, from evasion. To account for authorized non-payment, the 
+systemwide fare evasion rate calculated is subtracted by 1.7 percent. OMB obtained this figure by using 
+fare evasion survey data between March 2019 and February 2020 as a baseline and multiplying this 
+figure by 30 percent. This reflected the fact that APCs do not count children under 44 inches tall, which 
+made up 70 percent of the category in data before October 2019, when this category stopped being 
+measured. This calculation accounted for changes in short-drop ridership by using cash revenue market 
+share as a variable, and by calibrating the short-drop converting rate. 
+Ridership is removed on fare-free bus routes (both for the Q70, which is fare-free permanently,  routes 
+that were part of the fare-free pilot between September 2023 and August 2024 (Bx18A/B, S46/S96, B60, 
+M116, Q4)) for the calculation of fare evasion, resulting in an approximately 0.3 percent difference in 
+the overall system fare evasion rate.  
+Calculation 
+The BFE rate for a given route is the difference between the number of boardings and paid fares divided 
+by boardings; this calculation is only performed on trips with APC. To get the systemwide BFE rate, each 
+route’s BFE rate is weighted by its total paid ridership. Each route’s BFE rate is the summation of the BFE 
+rate for each trip block. Paid ridership for a trip block, 𝑖,  is equal to the sum of the number of MetroCard 
+and OMNY transactions matched to each trip block divided by the cash adjustment factor (cash rate) for 
+the route and day type for that block. 
+Here are the formulas for paid fares for a trip block, and for the fare evasion rate for a bus route: 
+𝑃𝑎𝑖𝑑 𝐹𝑎𝑟𝑒𝑠𝑖 = (𝑀𝑒𝑡𝑟𝑜𝐶𝑎𝑟𝑑𝑖  +  𝑂𝑀𝑁𝑌𝑖)
+(1  −  𝑐𝑎𝑠ℎ 𝑟𝑎𝑡𝑒)  
+𝐵𝐹𝐸𝑟𝑜𝑢𝑡𝑒 = ∑ ((𝐴𝑃𝐶 𝐵𝑜𝑎𝑟𝑑𝑖𝑛𝑔𝑠)𝑖  −  (𝑃𝑎𝑖𝑑 𝐹𝑎𝑟𝑒𝑠)𝑖)
+(𝐴𝑃𝐶 𝐵𝑜𝑎𝑟𝑑𝑖𝑛𝑔𝑠)𝑖
+ 𝑛
+𝑖=1 
+ 
+Where: 
+𝑖              = trip block, 
+𝑛    = number of trips/trip blocks with valid APC and AFC data in the  month, 
+𝑐𝑎𝑠ℎ 𝑟𝑎𝑡𝑒   = cash adjustment factor for the route and day type 
+(weekday/Saturday/Sunday) of trip/trip block 𝑖, 
+(𝐴𝑃𝐶 𝐵𝑜𝑎𝑟𝑑𝑖𝑛𝑔𝑠)𝑖  = number of boardings from APCs on trip/trip block 𝑖, 
+𝑀𝑒𝑡𝑟𝑜𝐶𝑎𝑟𝑑𝑖        = number of MetroCard transactions matched to trip/trip block 𝑖, and 
+𝑂𝑀𝑁𝑌𝑖  = number of OMNY transactions matched to APC trip/trip block 𝑖, 
+Next, the initial borough fare evasion rate for routes with APC data for a month is calculated. Until 2024, 
+when fewer buses had APCs, only routes with at least 1 percent of trips covered by APCs were included 
+in the calculation for 𝑚. The fare evasion rate of each route is multiplied by paid ridership for each route 
+divided by 1 subtracted by the fare evasion of that route. This is then multiplied by 1 divided by the 
+summation of ridership on each bus route divided by 1 minus the fare evasion rate for each route. This 
+bus fare evasion rate for routes with APC data is finally obtained by summing this value for each bus 
+route. 
+The formula for this calculation is: 
+𝐵𝐹𝐸𝑏𝑜𝑟𝑜−𝐴𝑃𝐶 = ∑ 𝐵𝐹𝐸𝑟𝑜𝑢𝑡𝑒
+  𝑚
+ 𝑟𝑜𝑢𝑡𝑒=1 ×
+𝑟𝑖𝑑𝑒𝑟𝑠𝑟𝑜𝑢𝑡𝑒
+1 − (𝐵𝐹𝐸𝑟𝑜𝑢𝑡𝑒) ×
+1
+𝑟𝑖𝑑𝑒𝑟𝑠𝑏𝑜𝑟𝑜−𝐴𝑃𝐶
+  
+Where: 
+𝑚    = # of bus routes, 
+𝐵𝐹𝐸𝑟𝑜𝑢𝑡𝑒  = the fare evasion rate of each route, 
+𝑟𝑖𝑑𝑒𝑟𝑠𝑟𝑜𝑢𝑡𝑒    = the official paid ridership for each route that month, and 
+𝑟𝑖𝑑𝑒𝑟𝑠𝑏𝑜𝑟𝑜−𝐴𝑃𝐶 = ∑ 𝑟𝑖𝑑𝑒𝑟𝑠𝑟𝑜𝑢𝑡𝑒
+1  −  (𝐵𝐹𝐸𝑟𝑜𝑢𝑡𝑒)
+ 𝑚
+ 𝑟𝑜𝑢𝑡𝑒=1
+ 
+The next step is to estimate the final boroughwide nonpayment rates. Until 2024, when not all routes 
+had at least 1 percent of trips covered by APCs, the first step was assuming that routes without 
+adequate APC coverage had the same fare evasion rate as routes with APC coverage (𝐵𝐹𝐸𝑏𝑜𝑟𝑜−𝐴𝑃𝐶). 
+Next, the fare evasion rate for a route is multiplied by official paid ridership for a route divided by 1 
+minus the fare evasion rate for a route. Then, it is multiplied by 1 divided by the summation of paid 
+ridership for each route multiplied by 1 plus the fare evasion rate for a route. This value is then summed 
+across all routes in the borough. 
+This formula is: 
+𝐵𝐹𝐸𝑏𝑜𝑟𝑜   = ∑ 𝐵𝐹𝐸𝑟𝑜𝑢𝑡𝑒
+𝑘 
+ 𝑟𝑜𝑢𝑡
+𝑒=1
+  ×   𝑟𝑖𝑑𝑒𝑟𝑠𝑟𝑜𝑢𝑡𝑒
+1 −  𝐵𝐹𝐸𝑟𝑜𝑢𝑡𝑒
+  ×   1
+𝑟𝑖𝑑𝑒𝑟𝑠𝑏𝑜𝑟𝑜
+ 
+Where: 
+𝑘 = # of routes in the borough, and  
+𝑟𝑖𝑑𝑒𝑟𝑠𝑏𝑜𝑟𝑜  =   ∑ 𝑟𝑖𝑑𝑒𝑟𝑠𝑟𝑜𝑢𝑡𝑒
+ 𝑘
+ 𝑟𝑜𝑢𝑡𝑒=1
+  ×  (1 + 𝐵𝐹𝐸𝑟𝑜𝑢𝑡𝑒) 
+To calculate the systemwide bus fare evasion rate, the same formula from the previous equation is 
+used, except with the summation being of the five borough rates. The formula for systemwide ridership, 
+𝑟𝑖𝑑𝑒𝑟𝑠𝑠𝑦𝑠𝑡𝑒𝑚, is different than that for ridership in a borough, 𝑟𝑖𝑑𝑒𝑟𝑠𝑏𝑜𝑟𝑜, being the summation of 
+𝑟𝑖𝑑𝑒𝑟𝑠𝑏𝑜𝑟𝑜 divided by 1 subtracted by the fare evasion rate for the five borough rates. 
+The formula for the systemwide APC nonpayment rate is then: 
+𝐵𝐹𝐸𝑆𝑦𝑠𝑡𝑒𝑚   = ∑ 𝐵𝐹𝐸𝑏𝑜𝑟𝑜
+5 
+ 𝑏𝑜𝑟𝑜=1
+  × 𝑟𝑖𝑑𝑒𝑟𝑠𝑏𝑜𝑟𝑜
+1 −  𝐵𝐹𝐸𝑏𝑜𝑟𝑜
+  ×   1
+𝑟𝑖𝑑𝑒𝑟𝑠𝑠𝑦𝑠𝑡𝑒𝑚
+ 
+Where: 
+𝐵𝐹𝐸𝑏𝑜𝑟𝑜 = the fare evasion rate of borough 𝑏, 
+𝑟𝑖𝑑𝑒𝑟𝑠𝑏𝑜𝑟𝑜 = the total ridership in borough 𝑏, and 
+𝑟𝑖𝑑𝑒𝑟𝑠𝑠𝑦𝑠𝑡𝑒𝑚 = ∑ 𝑟𝑖𝑑𝑒𝑟𝑠 𝑏𝑜𝑟𝑜
+1 − 𝐵𝐹𝐸𝑏𝑜𝑟𝑜
+ 5
+𝑏𝑜𝑟𝑜=1 
+ 
+Changes 
+Starting in March 2023, the MTA changed its methodology for measuring the SBS fare evasion rate to a 
+method consistent with that used to measure evasion on local and limited buses. This methodology is 
+believed to be more accurate as it is based on a wider sample. The change in methodology resulted in an 
+increase in the evasion rate for SBS. Data for this methodology is available back to Q4 2020. 
+Details on the previous methodology used to measure the SBS evasion rate are available in the next 
+section. 
+In 2024, the methodology was updated to make use of a pipeline that runs daily and automatically 
+instead of being done manually once a month, and to better reflect actual fare evasion, though there 
+were only minimal changes from existing numbers. The main changes are listed below: 
+The previous method from OP dropped routes with low APC coverage when aggregating from 
+route-level to borough-level evasion, or from borough-level to system-level. The other routes 
+were aggregated and weighted based on their number of trips. The new method just aggregates 
+all trips that had APC coverage. This is believed to better represent actual fare evasion, as routes 
+with low coverage tend to be higher in fare evasion. Since the process of matching payments to 
+trips, and therefore routes, relies on the quality of geospatial/time data from those payments, 
+which can be noisy, paid ridership is now scaled up somewhat to account for the small (<2 
+percent) of payments that are not matched to a route. 
+The process now removes fewer APC trips during data cleaning as a procedure was developed 
+that does not underestimate BFE when riders stay on for multiple trips, which is most common 
+on loop routes. In addition, the updated Bus Matching procedure identifies a greater number of 
+trips, especially those with more abnormal run patterns, providing a larger sample for 
+estimating BFE. 
+Prior to 2025 Q2, buses with zero MetroCard payments throughout an entire day of service were 
+removed from fare evasion calculation. This accounted for buses not having AFC data downloaded due 
+to maintenance, despite customers actually paying in line with the APC boardings. As OMNY ridership 
+share grew, this was deemed likely to exclude actual cases of buses with no MetroCard payments in a 
+day. This filter is no longer used. 
+Additionally, prior to 2025 Q2, routes with an origin at Canarsie-Rockaway Parkway Station (B6, B42, 
+B82) were excluded from calculation due to the free transfer within fare control at which customers did 
+not typically use the fare box upon entry. Due to changes at the station that require payment, these are 
+now included in the calculation. 
+In September 2025, paid ridership totals were updated to exclude $0 split fare transactions and bus fare 
+evasion rates were recalculated back to Q1 2022 using the current methodology to reflect these new 
+totals. $0 split fare transactions averaged approximately 30K daily rides from 2022-2025 (around 4% of 
+bus MetroCard ridership, 2% of overall bus paid ridership). As MetroCard ridership declined throughout 
+2025, the number of these transactions also declined. Removing these transactions from paid ridership 
+totals resulted in a slight increase in estimated fare evasion rates of approximately 1 percentage point. 
+Previous methodology 
+Select Bus Service 
+Fare evasion on all SBS routes except the S79 was estimated differently as off-board fare payment was 
+used for these routes, meaning traffic checkers would not be able to know which riders paid without 
+asking to see their tickets. The BFE rate was obtained based on data from enforcement surges by the 
+EAGLE Team in which plainclothes inspectors boarded a bus, had all doors closed, and asked to see 
+proof of payment for all passengers. Fare evasion was calculated as the number of riders without valid 
+proof of payment divided by the number of passengers inspected. This approach was developed with a 
+95 percent confidence level, and an error range of +/-2.6 percent.  
+Non-SBS routes 
+Background 
+Before COVID19, for all bus routes except express bus and SBS routes other than the S79 SBS, 
+systemwide fare evasion was estimated using surveys conducted by traffic checkers riding randomly 
+sampled bus trips. Quarterly monitoring using this method began in Q2 2012 by OP, following the 
+completion of fare evasion studies in 2008 and 2011. This method stopped being used due to the 
+COVID-19 pandemic to minimize staff present on buses. 
+MTA Audit Services and the MTA Inspector General had recommended the use of technology to replace 
+or supplement in person checks since it was challenging for checkers to listen to the farebox, categorize 
+each boarding, and monitor multiple doors while facing multiple potential distractions. An MTA Audit 
+Services review had found that the survey, in some cases, significantly undercounted fare evasion. 
+The sample for the surveys also excluded school trips (extra bus service added to the schedule to service 
+school dismissal) and only included full path trips, excluding mid-point reliefs. Checks were not done on 
+trips starting overnight since, with more infrequent service, no more than one trip could be scheduled 
+per shift. Trips had to have scheduled arrival times no later than 1 a.m., and departures no earlier than 
+5:15 a.m. for Manhattan and Queens, 5:45 a.m. for the Bronx and Brooklyn, and 6:15 a.m. for Staten 
+Island. 
+The measurement of fare evasion on express buses was removed from the survey in 2014 since the rate 
+was relatively low in surveys completed in 2012 and 2013 and since the cost of surveying was very high 
+since checkers required test cards, and due to many one-way trips. All steps detailed that apply to each 
+borough also formerly applied to express buses. 
+Step 1. Determine the desired margin of error. 
+Fare evasion surveys, like any statistical survey, are only point estimates of the true population values. 
+Since doing a 100 percent sample, with every single bus boarding in the system being surveyed, is 
+impossible, a random sample of bus trips was used to observe the systemwide BFE rate. With random 
+samples inherently having some error since the characteristics of the sampled population are not the 
+same as those of the entire population, and since the results would be subject to data collection errors, 
+some level of error, known as the margin of error (MOE), has to be determined as acceptable. For 
+example, at a fare evasion rate of five percent, the error rate has to be lower than five percent in order 
+for the results to be meaningful. A lower error margin, at a given statistical level of confidence, implies a 
+larger sample size. 
+This MOE is calculated using a formula based on the sample size, sample type, and the variability within 
+the survey results. This MOE is then used to create a confidence interval around the point estimate, tied 
+to a 95 percent probability that the true population value is within that range. 
+Formula used between 2012 and 2019 
+Until early 2019, the MOE was calculated using a formula for estimating the MOE for a population 
+proportion with a simple random sample. With this formula, the MOE was equal to the z-score for the 
+selected 95 percent confidence interval of 1.96 multiplied by the square root of the estimated 
+proportion of paying riders to all riders multiplied by the evasion rate (1 minus that proportion) divided 
+by the number of bus boarding observed by traffic checkers. The formula is: 
+𝑀𝐸 = 𝑧 √𝑝^ (1 − 𝑝^)
+𝑛  
+Where: 
+z – z-score (confidence interval). We assume a 95% confidence interval (z-score = 1.96), 
+p^ – estimated proportion of observations of paying riders to all riders, and 
+n – number of observed bus boardings 
+Knowing any two variables allowed for the third one to be calculated. Historical data provided guidance 
+to the values of all three variables. 
+Formula used between 2019 and 2020 
+In early 2019, the way the MOE was calculated was revised. The previous formula had been based on a 
+simple random sample, which would require observations of random individual passengers, as opposed 
+to random bus trips or pairs of trips, which is what was surveyed. To be more accurate, the MOE 
+calculation was changed to treat round trips as clusters of observations. The MOE formula for estimating 
+a proportion in a one-stage cluster sample would be used, similar to the formula that began to be used 
+for the subway between Q4 2018 and Q4 2020. 
+The evasion rate for the new formula is calculated as the summation of the number of selected persons 
+with the attribute of interest (illegal entries) in a specific cluster divided by the number of total selected 
+persons or entries (legal + questionable + illegal) for that specific cluster. These calculations are done 
+using the following formulas: 
+𝑝 = ∑ 𝑎𝑖
+𝑚𝑖
+𝑁
+𝑖=1
+ 
+𝑚𝑖 = 𝐿𝑖 + 𝑄𝑖 + 𝑎𝑖 
+The MOE is calculated with a 95 percent confidence level using the formula for the confidence interval 
+of a proportion, which is the z-score for the 95 percent confidence level (1.96) multiplied by the square 
+root of the variance of the proportion of illegal entries to total entries across sampled, or the fare 
+evasion rate, (v(p)). The numerator for the variance of the proportion is the summation of the number 
+of selected persons with the attribute of interest (illegal entries) in a specific cluster subtracted by the 
+evasion rate for that survey multiplied by the number of total selected persons or entries (legal + 
+questionable + illegal) for the specific cluster to the second power. The denominator for the variance of 
+the proportion is the number of sampled clusters, 𝑛,  multiplied by the number of sampled clusters 
+minus 1 multiplied by the average number of selected persons (entries) per cluster to the second power. 
+These calculations are done using the following formula:  
+𝑀𝐸 = 1.96√𝑣(𝑝) = 1.96√∑ (𝑎𝑖 − 𝑝𝑚𝑖)2 𝑁
+𝑖=1
+𝑛(𝑛 − 1) 𝑚̅ 2  
+Where: 
+ai is the number of illegal entries in sampled cluster i, 
+mi is the number of entries in sampled cluster i, 
+Li is the number of legal entries in sampled cluster i, 
+Qi is the number of questionable entries in sampled cluster i, 
+v(p) is the variance of p, 
+p is the proportion of total number of illegal entries to total entries across sampled 
+clusters, 
+𝑛 is the number of sampled clusters, and 
+𝑚̅ 2 is the average number of entries per sampled cluster 
+Step 2. Determine the minimum number of observations to reach the MOE. 
+The next step was to determine the minimum number of observations to reach the error margin. It was 
+assumed that the expected evasion rate was not very different from the previous quarter or year’s rate, 
+which allowed historical data to be used to determine the required number of observations for each 
+next cycle of the study. The number of observations for each borough could be taken directly from the 
+number of observations already made for the previous cycle as the MOE in the historic data was low 
+enough to be used. 
+The fare evasion rate is taken from fare evasion observations from the year ending at the end of the bus 
+operator pick (bus operators select, or pick, their work assignments, which correspond with schedule 
+changes, about four times a year, and each schedule is known as a pick) from one year before, and the 
+error margin taken from Step 1, are plugged into the MOE formula to calculate the minimum number of 
+observations, n. The next step was to calculate the number of observations for each borough. Bus routes 
+were assigned to strata based on the borough assigned in the bus route name. For example, sampled 
+trips from the Q59, an interborough bus route between Queens and Brooklyn, were assigned to the 
+strata for Queens. 
+In early 2019, when the margin of error calculation for bus fare evasion was changed, the sample 
+generation process was revised to be based on trip counts as opposed to ridership, and this step was 
+changed. One reason for the change was that the previous method meant that any borough with a 
+disproportionately low or high number surveys was under- or over-represented in the total systemwide 
+result. This was because survey results were added together without any weighting, regardless of 
+whether the number of surveys completed was proportional to the ridership in a given borough. 
+Between 2012 and early 2019, the number of observations for each borough was calculated by weighing 
+the systemwide n by borough ridership in the previous year, obtained from OMB. Between early 2019 
+and 2020, this was done by weighing the systemwide n by the scheduled number of local and limited 
+bus trips in each borough, also including MTA Bus trips. 
+Step 3. Determine the minimum number of bus trips. 
+The next step would determine the minimum number of bus trips to be surveyed. Different methods 
+were used before and after 2019. 
+Method used between 2012 and 2019 
+Between 2012 and early 2019, the next step was to convert sample observations to sample trips since 
+the random sample consisted of bus trips and not observations (individual boardings). The minimum 
+number of trips to be sampled for each borough was obtained by dividing observations, n, from the 
+previous step, by the load factor. The load factor is the average number of observations per trip and was 
+calculated for each borough by dividing total ridership in the borough by the total number of bus trips 
+for the previous year. 
+Method used between 2019 and 2020 
+With the change in early 2019, the number of round trips chosen for each pick would initially be based 
+on survey completion in the last bus operator pick. The targeted number of round trips chosen would be 
+the number of round trips completed in the previous pick divided by 80 percent, to account for traffic 
+checker availability. 
+Step 4. Divide trips proportionally into weekday, Saturday, and Sunday categories. 
+In the following step, the number of trips was apportioned among the days of the week (weekday, 
+Saturday, Sunday). While different load factors were calculated for borough, this was not done for day 
+type. Trips were divided proportionally to ridership between 2012 and early 2019, and by total number 
+of trips between 2019 and 2020. 
+Method used between 2012 and 2019 
+The number of trips to be sampled in each combination of borough and day type was obtained by 
+multiplying the number of trips during that period by the percentage of all ridership in a week for a 
+borough for that specific day type. 
+The formulas for these calculations are: 
+Weekday Trips = Trips * Weekday Borough Ridership / Total Borough Ridership 
+Saturday Trips = Trips * Saturday Borough Ridership / Total Borough Ridership 
+ Sunday Trips = Trips * Sunday Borough Ridership / Total Borough Ridership 
+Method used between 2019 and 2020 
+In early 2019, the sample size for each borough was changed to be in proportion to the share of bus 
+trips in the borough, and the sample size for each day of the week was changed to be proportioned to 
+the share of bus trips on those days instead of based on ridership. As such, the number of weekday trips 
+to be sampled was obtained by multiplying the number of trips to be sampled by 5/7. For both Saturday 
+and Sunday trips, the number of trips to be sampled was multiplied by 1/7. 
+Step 5. Generate random sample. 
+Next, the sample size was scaled up or down in proportion to the number of traffic checkers and the 
+length of the pick. For example, with six traffic checkers working five days a week, doing two round trips 
+per day, and 13 weeks in a quarter, there would be about 800 round trips that could be sampled. The 
+sample size for each category would be obtained by breaking down the scaled sample size by borough 
+and day type. The final step was to generate a random sample of trips representative of the above 
+distribution about every quarter, typically four times per year-once for each new bus operator pick and 
+occasionally between picks. 
+Samples were done around picks since trips in one pick might not exist in the next one, even if in the 
+same month. Since calendar quarters do not usually align with each pick, OP aggregated surveys from 
+multiple picks to create quarterly BFE estimates. It was not believed that the small number of 
+observations around the borders of reporting periods would make a major difference in the results. 
+Sample generation was done by giving a unique number to each bus route ID/trip ID combination and 
+using a random number generator to pick trips. To ensure enough trips in each category, the procedure 
+used buckets for each of the combinations of day type and borough. The procedure ran until every 
+bucket had the requested number of trips. 
+Sample assignment 
+Each week, OP analysts would schedule survey work for traffic checkers. Surveys would be assigned in a 
+relatively balanced manner using a sorted list of trips in a database with not all of a time of day or given 
+borough done first. They would also regularly review which surveys were not completed to reschedule 
+them for another chance to be completed. This database sorted trips-both those scheduled and those 
+not surveyed-inversely weighted by strata so trips in undersampled strata would appear first. This would 
+make it more likely for the analyst to assign those trips and correct any imbalance. 
+Traffic checkers were generally scheduled to observe two round trips per day, though sometimes only 
+one round trip was possible-especially when it was a long route starting from the checker reporting 
+location. These trips would be assigned to be in the same borough, when possible. Each sampled trip 
+was paired with a return trip on the same route for practical reasons, meaning about half the surveyed 
+trips came from the random sample. This round trip would also be paired with another based on how 
+close the origin of the two round trips were to each other to reduce travel time between assignments. 
+Conducting the surveys 
+Traffic checkers would ride on assigned bus trips near the front door and record all boardings using a 
+custom-built app on tablets. However, if there were technical issues, they were required to perform 
+surveys on paper. Checkers would count boardings and assign them to categories by listening to the 
+distinct tone the farebox produced to indicate an invalid MetroCard or incomplete fare payment and 
+watching each passenger’s interaction with the farebox and driver. Since bus operators would also not 
+always press the reset button, short drops were hard to detect. 
+BFE was divided into two categories during observations: illegal evasion and authorized non-payment, 
+which included questionable or legal boarding. Illegal fare evasion included all situations where a person 
+clearly did not pay their fare as required. It includes passengers who board a bus without making an 
+attempt to pay the fare or paying less than required (Short Drop). Authorized nonpayment was not 
+included in the number of illegal boardings. Questionable boarding included instances where it was 
+unclear whether a person paid or needed to pay, such as riders who gave pieces of paper to the bus 
+operator, like SBS tickets or paper transfers. Legal boarding includes riders who are not required to pay, 
+such as children under 44 inches tall, uniformed officers, organized school groups with a letter 
+presented to the operator, and employees who show but do not dip their employee pass. 
+Checkers would also note unusual occurrences. If there was a service disruption on a bus, including its 
+deviating from its planned route, terminating before its scheduled end of the route, becoming too 
+crowded, or having farebox problems, the checker could optionally exit the bus at an intermediate stop 
+and board the next bus in the same direction on the same route and resume the survey. 
+After surveys were completed, the data was uploaded to a central database. An analyst would run data 
+validation reports to identify any data the checker may not have collected correctly or that might have 
+been corrupted during the upload process. Multiple automated checks would flag potential issues for 
+analysts to examine. The analyst could exclude any checks with inaccurate or corrupted data. 
+Other Changes 
+Starting in July 2019, MTA Bus, NYCT bus, and subway fare evasion observations were performed by the 
+same group of traffic checkers, allowing more checkers to fully devote their time to observing fare 
+evasion. Previously, fare evasion for MTA Bus had been studied and calculated separately, though with 
+the same procedures as NYCT. The studies were combined with random cluster samples generated 
+together. 
+Multiple efforts were introduced in fall 2019 to improve the accuracy of the data. The number of 
+supervisors was increased from 1 to 4, and a new automated report was introduced to highlight 
+potential issues with checks during data validation. A minimum completion goal of 80 percent was also 
+implemented. In October 2019, fare evasion surveys were simplified to allow checkers to better focus on 
+identifying evasion, with a reduced number of categories for type of evasion.  
+To reduce undercounts of evasion from the third door of articulated buses due to sightline problems 
+when they were crowded, staff were added to monitor that door, and a pilot was begun in late 2019 to 
+monitor it using video. Every month, OP analysts would provide a list of articulated buses that were 
+surveyed to the Traffic Checker Supervisor to request videos of the third door from various depots. Once 
+the video file was acquired, traffic checkers would watch the videos and tally the number of evaders 
+entering through the third door. Rear door video observations were used to create an average scaling 
+rate on a monthly basis to estimate rear door observations based on second door observations. This rate 
+was calculated by finding the sum of the rear door evaders and third door evaders and dividing third 
+door evaders by rear door evaders, calculating the ratio of the third door to the second door evaders. 
+Statistical and Analytic Issues 
+This dataset includes the BFE rate for local and limited-stop buses back to Q1 2019, express buses back 
+to Q4 2020, and for SBS back to Q1 2021. The Q1 2020 BFE survey was incomplete in March due to the 
+COVID-19 pandemic. There were no measurements in Q2 or Q3 2020 for any type of bus service due to 
+the pandemic, and since no local bus fares were collected between April and September. 
+Since data between Q1 2019 and Q1 2020 was obtained using surveys conducted by traffic checkers, 
+human error could take place. Data after Q4 2020 is from the newer APC methodology. Some minor 
+changes were made to this methodology in 2024 and 2025. 
+Once reported, fare evasion records are not updated. Note that the “true” underlying fare evasion 
+number for a given quarter may have changed due to late arriving data (buses may rarely return from 
+maintenance to service and report AFC or APC data several months after service). We do not expect 
+these to affect the final numbers by more than 0.1%, and to maintain consistent reporting these 
+adjustments are not made. The exception to this is the update made in Q4 2025, when historical values 
+were recalculated back to Q1 2022 to reflect the new approach to short-drop payments. 
+Limitations of Data Use  
+There are no limitations on the data at this time. 
+Release Notes  
+Version 1.0.0 release notes instituted and methodology tweaked (08/20/2024)  
+Version 2.0.0 ridership field removed and systemwide fare evasion records added (01/29/2025) 
+Version 2.0.1 documentation updated (03/13/2025) 
+Version 2.0.2 documentation updated and historical data recalculated (10/24/2025) 
+ 

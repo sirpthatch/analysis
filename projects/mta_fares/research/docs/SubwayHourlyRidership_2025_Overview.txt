@@ -1,0 +1,120 @@
+MT A Subway Hourly Ridership 
+Overview 
+General Description 
+The Metropolitan Transportation Authority (MTA) is a public-benefit corporation responsible for public 
+transportation in the state of New York serving 12 counties in southeastern New York, along with two 
+counties in southwestern Connecticut under contract to the Connecticut Department of Transportation 
+(CDOT). The MTA is the largest transportation network in North America. 
+Subway service within New York City is operated by MTA New York City Transit (NYCT). 
+MTA Staten Island Railway (SIR) is the only rapid transit line on Staten Island, providing local service 24/7 
+between St. George, where timed connections are available with the Staten Island Ferry to Manhattan, 
+and Tottenville, running along the east side of the island. It is owned by the Staten Island Rapid Transit 
+Operating Authority (SIRTOA) and is operated by MTA New York City Transit (NYCT). 
+The Roosevelt Island Tramway, operated by the Roosevelt Island Operating Corporation, is the most 
+modern aerial tramway in the world. It provides between 59th St and 2nd Avenue in Manhattan to 
+Tramway Plaza on Roosevelt Island. 
+This dataset provides subway, SIR, and Roosevelt Island Tramway ridership, compiled at the hourly level, 
+by station complex and fare payment method (OMNY or MetroCard), and consolidated fare class 
+(MetroCard – Fair Fare, MetroCard – Full Fare, MetroCard – Other, MetroCard – Senior & Disability, 
+MetroCard – Students, MetroCard – Unlimited 30-Day, MetroCard – Unlimited 7-Day, OMNY – Fair Fare, 
+OMNY – Full Fare – Other, OMNY – Seniors & Disabilities, OMNY – Students). MetroCard – Fair Fare and 
+OMNY data is only available following their introductions in 2019, with different kinds of OMNY cards 
+being rolled out at different subsequent dates. 
+These ridership metrics are within 1% of ridership figures provided at public MTA board meetings. These 
+numbers differ slightly since the data subsequently incorporates additional budget reconciliation. Data is 
+released daily and is subject to revision. You can learn more about OMNY, the contactless fare payment 
+system for public transportation in the New York region at omny.info. 
+Additional years of this dataset can be found by looking at the subway hourly tag on the State Open 
+Data portal. 
+This dataset was published during the first phase of the MTA’s commitment to increasing transparency. 
+We continually examine all our published and publishable data with a view to both providing datasets 
+that can be effectively utilized by our customers and the public at large, and to providing regular, 
+automated updates to these datasets efficiently and sustainably. Consequently, this dataset may be 
+restructured and/or combined with other similar datasets in the future. 
+Data Collection Methodology 
+This dataset captures rider entries made at subway turnstiles by using OMNY and MetroCard 
+taps/swipes. MetroCard data is aggregated from on-premises MTA data servers, while OMNY data is 
+provided by a third-party vendor named Cubic. 
+Before being released this data undergoes substantial data cleaning; transactions are deduplicated, and 
+MetroCard swipes and OMNY taps collected by some partner agencies (PATH, Westchester Bee-Line 
+Bus, NICE Bus) are removed from the dataset. 
+A very small number of MetroCard and OMNY transactions arrive late due to temporary hardware 
+malfunctions. This late-arriving data is incorporated as it is made available, and thus historical data in 
+this dataset is subject to slight adjustments. 
+The fare class categories consolidate the dozens of individual fare types into easier to understand 
+categories. Over time, some fare types are discontinued, and other types are added. This table provides 
+some examples of the most frequently used fare types that fall within each category. 
+Fare Class Category Specific code 
+OMNY – Full Fare Full Fare 
+OMNY – Seniors & Disability Red-Senior 
+Red-Disability 
+Paratransit 
+PT w/ PCA 
+PCA 
+OMNY – Fair Fare Fair Fare 
+OMNY – Students DOE Student 
+OMNY – Other 
+ 
+Test-Free 
+Limited Use 
+CUNY Student 
+MetroCard – Full Fare Full Fare 
+Pre-Valued 
+Pre-Valued Zero 
+JFK Pre-Valued Jamaica 
+Pre-Valued Express 
+JFK Pre-Valued Howard Beach 
+MetroCard – Unlimited 30-Day 30-Day Unlimited 
+30-Day Reduced Fare Media Unlimited 
+30-Day Agency 
+30-Day ADA Farecard Access System Unlimited 
+MetroCard – Unlimited 7-Day 7-Day Unlimited 
+7-Day Reduced Fare Media Unlimited 
+7-Day Express Bus Pass 
+7-Day Agency 
+7-Day ADA Farecard Access System Unlimited 
+MetroCard – Fair Fare Fair Fare Value 
+Fair Fare 30-Day 
+Fair Fare 7-Day 
+MetroCard – Students Student Free 3 
+Student Free 3/VOS 
+Student Free 4 
+Student Free 4/VOS 
+Special Student Pass 
+MetroCard – Other  Employee Restricted 
+TransitCheck MetroCard Annual Card 
+CB Annual MetroCard 
+Two-Trip Agency 
+CUNY ASAP 120-day 
+Mail and Ride EasyPayExpress 
+Employee Unrestricted 
+Mail and Ride EasyPay Unlimited 
+TransitCheck MetroCard 
+AirTrain Full Fare 
+RRC FareCard 
+One-Trip Agency 
+Employee Res Express 
+Employee Res EX MTA 
+Temporary Pass 
+MetroCard – Seniors & Disability Senior Citizen 
+Mail and Ride Senior Citizen 
+Disabled 
+Access-a-Ride Personal Care Attendant (Paratransit MetroCard) 
+Reduced Fare Temporary 
+Access-a-Ride No Personal Care Attendant (Paratransit 
+MetroCard) 
+Disabled ADA Farecard Access System Pay-Per-Ride 
+Mail and Ride Autogate 
+Mail and Ride Disabled 
+Statistical and Analytic Issues 
+Data is released to the Open Data portal daily and is subject to revision for late-arriving data. 
+Limitations of Data Use 
+There are no limitations on the data at this time. 
+Release Notes 
+Version 1.0.0 release note instituted with the addition of OMNY – Students as a fare class category 
+(10/15/2024) 
+Version 1.1.0 added 2025 dataset (1/16/2025) 
+Version 1.2.0 bug fix to remove MetroCard trade-in transactions from being counted as rides 
+(10/7/2025) 
+ 
+ 

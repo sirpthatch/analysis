@@ -1,0 +1,370 @@
+[
+  {
+    "month": "2019-01-01T00:00:00.000",
+    "total_fair_fares_enrollees": "1058"
+  },
+  {
+    "month": "2019-02-01T00:00:00.000",
+    "total_fair_fares_enrollees": "5443"
+  },
+  {
+    "month": "2019-03-01T00:00:00.000",
+    "total_fair_fares_enrollees": "10948"
+  },
+  {
+    "month": "2019-04-01T00:00:00.000",
+    "total_fair_fares_enrollees": "38123"
+  },
+  {
+    "month": "2019-05-01T00:00:00.000",
+    "total_fair_fares_enrollees": "49666"
+  },
+  {
+    "month": "2019-06-01T00:00:00.000",
+    "total_fair_fares_enrollees": "58946"
+  },
+  {
+    "month": "2019-07-01T00:00:00.000",
+    "total_fair_fares_enrollees": "65008"
+  },
+  {
+    "month": "2019-08-01T00:00:00.000",
+    "total_fair_fares_enrollees": "69956"
+  },
+  {
+    "month": "2019-09-01T00:00:00.000",
+    "total_fair_fares_enrollees": "75211"
+  },
+  {
+    "month": "2019-10-01T00:00:00.000",
+    "total_fair_fares_enrollees": "87119"
+  },
+  {
+    "month": "2019-11-01T00:00:00.000",
+    "total_fair_fares_enrollees": "92330"
+  },
+  {
+    "month": "2019-12-01T00:00:00.000",
+    "total_fair_fares_enrollees": "96092"
+  },
+  {
+    "month": "2020-01-01T00:00:00.000",
+    "total_fair_fares_enrollees": "119673"
+  },
+  {
+    "month": "2020-02-01T00:00:00.000",
+    "total_fair_fares_enrollees": "147889"
+  },
+  {
+    "month": "2020-03-01T00:00:00.000",
+    "total_fair_fares_enrollees": "166106"
+  },
+  {
+    "month": "2020-04-01T00:00:00.000",
+    "total_fair_fares_enrollees": "177500"
+  },
+  {
+    "month": "2020-05-01T00:00:00.000",
+    "total_fair_fares_enrollees": "180465"
+  },
+  {
+    "month": "2020-06-01T00:00:00.000",
+    "total_fair_fares_enrollees": "193864"
+  },
+  {
+    "month": "2020-07-01T00:00:00.000",
+    "total_fair_fares_enrollees": "203946"
+  },
+  {
+    "month": "2020-08-01T00:00:00.000",
+    "total_fair_fares_enrollees": "213746"
+  },
+  {
+    "month": "2020-09-01T00:00:00.000",
+    "total_fair_fares_enrollees": "195168"
+  },
+  {
+    "month": "2020-10-01T00:00:00.000",
+    "total_fair_fares_enrollees": "214510"
+  },
+  {
+    "month": "2020-11-01T00:00:00.000",
+    "total_fair_fares_enrollees": "217968"
+  },
+  {
+    "month": "2020-12-01T00:00:00.000",
+    "total_fair_fares_enrollees": "227946"
+  },
+  {
+    "month": "2021-01-01T00:00:00.000",
+    "total_fair_fares_enrollees": "238592"
+  },
+  {
+    "month": "2021-02-01T00:00:00.000",
+    "total_fair_fares_enrollees": "235968"
+  },
+  {
+    "month": "2021-03-01T00:00:00.000",
+    "total_fair_fares_enrollees": "233655"
+  },
+  {
+    "month": "2021-04-01T00:00:00.000",
+    "total_fair_fares_enrollees": "231562"
+  },
+  {
+    "month": "2021-05-01T00:00:00.000",
+    "total_fair_fares_enrollees": "232400"
+  },
+  {
+    "month": "2021-06-01T00:00:00.000",
+    "total_fair_fares_enrollees": "235583"
+  },
+  {
+    "month": "2021-07-01T00:00:00.000",
+    "total_fair_fares_enrollees": "238280"
+  },
+  {
+    "month": "2021-08-01T00:00:00.000",
+    "total_fair_fares_enrollees": "243568"
+  },
+  {
+    "month": "2021-09-01T00:00:00.000",
+    "total_fair_fares_enrollees": "252027"
+  },
+  {
+    "month": "2021-10-01T00:00:00.000",
+    "total_fair_fares_enrollees": "259264"
+  },
+  {
+    "month": "2021-11-01T00:00:00.000",
+    "total_fair_fares_enrollees": "261041"
+  },
+  {
+    "month": "2021-12-01T00:00:00.000",
+    "total_fair_fares_enrollees": "264132"
+  },
+  {
+    "month": "2022-01-01T00:00:00.000",
+    "total_fair_fares_enrollees": "269278"
+  },
+  {
+    "month": "2022-02-01T00:00:00.000",
+    "total_fair_fares_enrollees": "271576"
+  },
+  {
+    "month": "2022-03-01T00:00:00.000",
+    "total_fair_fares_enrollees": "275763"
+  },
+  {
+    "month": "2022-04-01T00:00:00.000",
+    "total_fair_fares_enrollees": "276587"
+  },
+  {
+    "month": "2022-05-01T00:00:00.000",
+    "total_fair_fares_enrollees": "273980"
+  },
+  {
+    "month": "2022-06-01T00:00:00.000",
+    "total_fair_fares_enrollees": "271892"
+  },
+  {
+    "month": "2022-07-01T00:00:00.000",
+    "total_fair_fares_enrollees": "269118"
+  },
+  {
+    "month": "2022-08-01T00:00:00.000",
+    "total_fair_fares_enrollees": "271140"
+  },
+  {
+    "month": "2022-09-01T00:00:00.000",
+    "total_fair_fares_enrollees": "277836"
+  },
+  {
+    "month": "2022-10-01T00:00:00.000",
+    "total_fair_fares_enrollees": "281324"
+  },
+  {
+    "month": "2022-11-01T00:00:00.000",
+    "total_fair_fares_enrollees": "281629"
+  },
+  {
+    "month": "2022-12-01T00:00:00.000",
+    "total_fair_fares_enrollees": "282678"
+  },
+  {
+    "month": "2023-01-01T00:00:00.000",
+    "total_fair_fares_enrollees": "285428"
+  },
+  {
+    "month": "2023-02-01T00:00:00.000",
+    "total_fair_fares_enrollees": "284608"
+  },
+  {
+    "month": "2023-03-01T00:00:00.000",
+    "total_fair_fares_enrollees": "287677"
+  },
+  {
+    "month": "2023-04-01T00:00:00.000",
+    "total_fair_fares_enrollees": "286392"
+  },
+  {
+    "month": "2023-05-01T00:00:00.000",
+    "total_fair_fares_enrollees": "288779"
+  },
+  {
+    "month": "2023-06-01T00:00:00.000",
+    "total_fair_fares_enrollees": "294505"
+  },
+  {
+    "month": "2023-07-01T00:00:00.000",
+    "total_fair_fares_enrollees": "301240"
+  },
+  {
+    "month": "2023-08-01T00:00:00.000",
+    "total_fair_fares_enrollees": "310133"
+  },
+  {
+    "month": "2023-09-01T00:00:00.000",
+    "total_fair_fares_enrollees": "317338"
+  },
+  {
+    "month": "2023-10-01T00:00:00.000",
+    "total_fair_fares_enrollees": "320026"
+  },
+  {
+    "month": "2023-11-01T00:00:00.000",
+    "total_fair_fares_enrollees": "319517"
+  },
+  {
+    "month": "2023-12-01T00:00:00.000",
+    "total_fair_fares_enrollees": "320135"
+  },
+  {
+    "month": "2024-01-01T00:00:00.000",
+    "total_fair_fares_enrollees": "325113"
+  },
+  {
+    "month": "2024-02-01T00:00:00.000",
+    "total_fair_fares_enrollees": "326899"
+  },
+  {
+    "month": "2024-03-01T00:00:00.000",
+    "total_fair_fares_enrollees": "330304"
+  },
+  {
+    "month": "2024-04-01T00:00:00.000",
+    "total_fair_fares_enrollees": "332304"
+  },
+  {
+    "month": "2024-05-01T00:00:00.000",
+    "total_fair_fares_enrollees": "334796"
+  },
+  {
+    "month": "2024-06-01T00:00:00.000",
+    "total_fair_fares_enrollees": "339748"
+  },
+  {
+    "month": "2024-07-01T00:00:00.000",
+    "total_fair_fares_enrollees": "345367"
+  },
+  {
+    "month": "2024-08-01T00:00:00.000",
+    "total_fair_fares_enrollees": "351548"
+  },
+  {
+    "month": "2024-09-01T00:00:00.000",
+    "total_fair_fares_enrollees": "357003"
+  },
+  {
+    "month": "2024-10-01T00:00:00.000",
+    "total_fair_fares_enrollees": "358967"
+  },
+  {
+    "month": "2024-11-01T00:00:00.000",
+    "total_fair_fares_enrollees": "361317"
+  },
+  {
+    "month": "2024-12-01T00:00:00.000",
+    "total_fair_fares_enrollees": "364435"
+  },
+  {
+    "month": "2025-01-01T00:00:00.000",
+    "total_fair_fares_enrollees": "367999"
+  },
+  {
+    "month": "2025-02-01T00:00:00.000",
+    "total_fair_fares_enrollees": "367400"
+  },
+  {
+    "month": "2025-03-01T00:00:00.000",
+    "total_fair_fares_enrollees": "370401"
+  },
+  {
+    "month": "2025-04-01T00:00:00.000",
+    "total_fair_fares_enrollees": "372385"
+  },
+  {
+    "month": "2025-05-01T00:00:00.000",
+    "total_fair_fares_enrollees": "374432"
+  },
+  {
+    "month": "2025-06-01T00:00:00.000",
+    "total_fair_fares_enrollees": "378527"
+  },
+  {
+    "month": "2025-07-01T00:00:00.000",
+    "total_fair_fares_enrollees": "381912"
+  },
+  {
+    "month": "2025-08-01T00:00:00.000",
+    "total_fair_fares_enrollees": "383090"
+  },
+  {
+    "month": "2025-09-01T00:00:00.000",
+    "total_fair_fares_enrollees": "386544"
+  },
+  {
+    "month": "2025-10-01T00:00:00.000",
+    "total_fair_fares_enrollees": "387716"
+  },
+  {
+    "month": "2025-11-01T00:00:00.000",
+    "total_fair_fares_enrollees": "386211"
+  },
+  {
+    "month": "2025-12-01T00:00:00.000",
+    "total_fair_fares_enrollees": "384127"
+  },
+  {
+    "month": "2026-01-01T00:00:00.000",
+    "total_fair_fares_enrollees": "389405"
+  },
+  {
+    "month": "2026-02-01T00:00:00.000",
+    "total_fair_fares_enrollees": "379354"
+  },
+  {
+    "month": "2026-03-01T00:00:00.000",
+    "total_fair_fares_enrollees": "379910"
+  },
+  {
+    "month": "2026-04-01T00:00:00.000",
+    "total_fair_fares_enrollees": "381558"
+  },
+  {
+    "month": "2026-05-01T00:00:00.000",
+    "total_fair_fares_enrollees": "383377"
+  },
+  {
+    "month": "2026-06-01T00:00:00.000",
+    "total_fair_fares_enrollees": "384914"
+  },
+  {
+    "month": "2026-07-01T00:00:00.000",
+    "total_fair_fares_enrollees": "384372"
+  },
+  {
+    "month": "2026-08-01T00:00:00.000",
+    "total_fair_fares_enrollees": "382820"
+  }
+]

@@ -1,0 +1,54 @@
+MTA Subway Hourly Ridership 
+Data Dictionary 
+Data Label Data Type Data Description 
+transit_timestamp DATE 
+Timestamp payment took place in local time. All 
+transactions here are rounded down to the nearest 
+hour. For example, a swipe that took place at 1:37pm 
+will be reported as having taken place at 1pm. 
+transit_mode TEXT 
+Distinguishes between the subway, Staten Island 
+Railway, and the Roosevelt Island Tram 
+station_complex_id ALPHANUMERIC A unique identifier for station complexes 
+station_complex TEXT 
+The subway complex where an entry swipe or tap took 
+place. Large subway complexes, such as Times Square 
+and Fulton Center, may contain multiple subway lines. 
+The subway complex name includes the routes that stop 
+at the complex in parenthesis, such as Zerega Av (6). 
+borough TEXT 
+Represents one of the boroughs of New York City 
+serviced by the subway system (Bronx, Brooklyn, 
+Manhattan, Queens). 
+payment_method TEXT 
+Specifies whether the payment method used to enter 
+was from OMNY or MetroCard. 
+fare_class_category TEXT 
+The class of fare payment used for the trip. The 
+consolidated categories are: 
+• MetroCard – Fair Fare 
+• MetroCard – Full Fare 
+• MetroCard – Other 
+• MetroCard – Senior & Disability 
+• MetroCard – Students 
+• MetroCard – Unlimited 30-Day 
+• MetroCard – Unlimited 7-Day 
+• OMNY – Full Fare 
+• OMNY – Other 
+• OMNY – Seniors & Disabilities 
+ridership NUMERIC 
+Total number of riders that entered a subway complex 
+via OMNY or MetroCard at the specific hour and for that 
+specific fare type. 
+transfers NUMERIC 
+Number of individuals who entered a subway complex 
+via a free bus-to-subway, or free out-of-network 
+transfer. This represents a subset of total ridership, 
+meaning that these transfers are already included in the 
+preceding ridership column. Transfers that take place 
+within a subway complex (e.g., individuals transferring 
+from the 2 to the 4 train within Atlantic Avenue) are not 
+captured here. 
+latitude DECIMAL Latitude for the specified subway complex 
+longitude DECIMAL Longitude for the specified subway complex 
+ 

@@ -1,0 +1,8 @@
+[
+  {
+    "count": "1222525",
+    "sum_ridership": "53643755.0",
+    "min_transit_timestamp": "2024-09-01T00:00:00.000",
+    "max_transit_timestamp": "2024-09-16T23:00:00.000"
+  }
+]
