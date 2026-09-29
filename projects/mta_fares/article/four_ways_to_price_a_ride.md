@@ -101,12 +101,27 @@ The real benefit of this proposal is to take advantage of [prospect theory's](ht
 
 ## Parting Thoughts
 
-|                                        | What changes                                                 | Revenue effect                                               | With a 5¢ fare rise                 | Who comes out ahead                                          |
-| -------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------- | ------------------------------------------------------------ |
-| **1. Monthly cap**                     | Rides free after $138 (46 rides) in 30 days, on top of today's $35 weekly cap | **−$12M to −$20M**                                           | **+$25M to +$33M**                  | 5–11% of full-fare riders, the most frequent; up to $13.67/month for someone who caps every week |
-| **2. Inverse distance**                | $3.75 under 2 mi · $3.15 for 2–5 · $2.50 for 5–9 · $1.90 over 9 | **~$0 by design**; −$15M after rider response; **−$73M to −$145M** if short-trip riders switch to walking or biking | Not needed (designed to be neutral) | Commutes from lower-income neighborhoods ~6% cheaper on average |
-| **3. Prepaid reserve** (E-ZPass style) | Riders keep ~a month of fares on account (median ~$49; daily riders ~$150) | **+$10M** interest ($5–18M); unused-balance "breakage" **+$20M**; unknown additional card-fee savings | Not modeled                         | The MTA; riders lose the interest and must front the money   |
-| **4. Golden stations**                 | 5 stations a day, drawn at random from 287 lower-income stations, ride free that day | **−$22M** (excludes riders traveling to the golden station)  | **+$22.8M**                         | Whoever boards at a golden station that day (each eligible station ~6 days a year); a 5-day commuter from an eligible station saves ~$14/yr but pays ~$26 more, **net ≈ −$12** |
+Here is how the four proposals compare (all figures are per year):
+
+**1. Monthly cap**: Rides free after $138 (46 rides) in 30 days, on top of today's $35 weekly cap.
+- Revenue effect: **−$12M to −$20M**
+- With a 5¢ fare rise: **+$25M to +$33M**
+- Who comes out ahead: 5–11% of full-fare riders, the most frequent; up to $13.67/month for someone who caps every week
+
+**2. Inverse distance**: $3.75 under 2 mi · $3.15 for 2–5 · $2.50 for 5–9 · $1.90 over 9.
+- Revenue effect: **~$0 by design**; −$15M after rider response; **−$73M to −$145M** if short-trip riders switch to walking or biking
+- With a 5¢ fare rise: Not needed (designed to be neutral)
+- Who comes out ahead: Commutes from lower-income neighborhoods ~6% cheaper on average
+
+**3. Prepaid reserve** (E-ZPass style): Riders keep ~a month of fares on account (median ~$49; daily riders ~$150).
+- Revenue effect: **+$10M** interest ($5–18M); unused-balance "breakage" **+$20M**; unknown additional card-fee savings
+- With a 5¢ fare rise: Not modeled
+- Who comes out ahead: The MTA; riders lose the interest and must front the money
+
+**4. Golden stations**: 5 stations a day, drawn at random from 287 lower-income stations, ride free that day.
+- Revenue effect: **−$22M** (excludes riders traveling to the golden station)
+- With a 5¢ fare rise: **+$22.8M**
+- Who comes out ahead: Whoever boards at a golden station that day (each eligible station ~6 days a year); a 5-day commuter from an eligible station saves ~$14/yr but pays ~$26 more, **net ≈ −$12**
 
 It is fun to think about how to reorient NYC metro fares. Of the proposals discussed here, my recommendation would be to do #1 (Resurrect the Monthly Cap) with some version of #3 (Prepayment). These could be stacked together to allow for the re-introduction of the monthly cap while still being revenue neutral to positive for the MTA.
 
@@ -140,23 +155,22 @@ That said, if the MTA is serious about wanting public creativity engaged on how 
 
 All MTA datasets are published on New York State's open data portal; the income data is on NYC Open Data.
 
-| Dataset | What it was used for |
-|---|---|
-| [MTA Subway Hourly Ridership: Beginning 2025](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-2025/5wq4-mkjj) | Rides by station, hour and fare type; revenue model; 2026 station traffic |
-| [MTA Subway Hourly Ridership: 2020–2024](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-2020-2024/wujg-7c2s) | Monthly-pass use by station in 2024; the three-year decline of the 30-Day |
-| [MTA Bus Hourly Ridership: Beginning 2025](https://data.ny.gov/Transportation/MTA-Bus-Hourly-Ridership-Beginning-2025/gxb3-akrn) | Bus revenue model |
-| [MTA Bus Hourly Ridership: 2020–2024](https://data.ny.gov/Transportation/MTA-Bus-Hourly-Ridership-2020-2024/kv7t-n8in) | Bus revenue model |
-| [MTA Subway Origin-Destination Ridership Estimate: Beginning 2026](https://data.ny.gov/Transportation/MTA-Subway-Origin-Destination-Ridership-Estimate-B/28vm-gjqr) | Trip distances for the inverse-distance fare |
-| [MTA Subway Origin-Destination Ridership Estimate: 2024](https://data.ny.gov/Transportation/MTA-Subway-Origin-Destination-Ridership-Estimate-2/jsu2-fbtj) | The 2024 edition of the same estimates (not used in the figures here) |
-| [MTA NYCT Subway Fare Evasion: Beginning 2018](https://data.ny.gov/Transportation/MTA-NYCT-Subway-Fare-Evasion-Beginning-2018/6kj3-ijvb) | Subway evasion rates |
-| [MTA Bus Fare Evasion: Beginning 2019](https://data.ny.gov/Transportation/MTA-Bus-Fare-Evasion-Beginning-2019/uv5h-dfhp) | Bus evasion rates |
-| [MTA Statement of Operations: Beginning 2019](https://data.ny.gov/Transportation/MTA-Statement-of-Operations-Beginning-2019/yg77-3tkj) | The MTA's actual farebox revenue, to check the model |
-| [MTA Daily Ridership and Traffic: Beginning 2020](https://data.ny.gov/Transportation/MTA-Daily-Ridership-and-Traffic-Beginning-2020/sayj-mze2) | Access-A-Ride trips; official ridership totals |
-| [Community Development Block Grant (CDBG) Eligibility by Census Tract](https://data.cityofnewyork.us/City-Government/Community-Development-Block-Grant-CDBG-Eligibility/qmcw-ur37) | Neighborhood income around each station (HUD low/moderate-income share) |
-| [Census 2023 Gazetteer, census tracts (New York)](https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2023_Gazetteer/2023_gaz_tracts_36.txt) | Tract locations, to match income to stations |
-| [Fair Fares Enrollees](https://data.cityofnewyork.us/Social-Services/Fair-Fares-Enrollees/3tw8-6si8) | Monthly Fair Fares enrollment |
-| [3-Month Treasury Bill Rate (DGS3MO)](https://fred.stlouisfed.org/series/DGS3MO) | Interest rate for the prepaid float (FRED, St. Louis Fed) |
+- [MTA Subway Hourly Ridership: Beginning 2025](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-2025/5wq4-mkjj) — Rides by station, hour and fare type; revenue model; 2026 station traffic
+- [MTA Subway Hourly Ridership: 2020–2024](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-2020-2024/wujg-7c2s) — Monthly-pass use by station in 2024; the three-year decline of the 30-Day
+- [MTA Bus Hourly Ridership: Beginning 2025](https://data.ny.gov/Transportation/MTA-Bus-Hourly-Ridership-Beginning-2025/gxb3-akrn) — Bus revenue model
+- [MTA Bus Hourly Ridership: 2020–2024](https://data.ny.gov/Transportation/MTA-Bus-Hourly-Ridership-2020-2024/kv7t-n8in) — Bus revenue model
+- [MTA Subway Origin-Destination Ridership Estimate: Beginning 2026](https://data.ny.gov/Transportation/MTA-Subway-Origin-Destination-Ridership-Estimate-B/28vm-gjqr) — Trip distances for the inverse-distance fare
+- [MTA Subway Origin-Destination Ridership Estimate: 2024](https://data.ny.gov/Transportation/MTA-Subway-Origin-Destination-Ridership-Estimate-2/jsu2-fbtj) — The 2024 edition of the same estimates (not used in the figures here)
+- [MTA NYCT Subway Fare Evasion: Beginning 2018](https://data.ny.gov/Transportation/MTA-NYCT-Subway-Fare-Evasion-Beginning-2018/6kj3-ijvb) — Subway evasion rates
+- [MTA Bus Fare Evasion: Beginning 2019](https://data.ny.gov/Transportation/MTA-Bus-Fare-Evasion-Beginning-2019/uv5h-dfhp) — Bus evasion rates
+- [MTA Statement of Operations: Beginning 2019](https://data.ny.gov/Transportation/MTA-Statement-of-Operations-Beginning-2019/yg77-3tkj) — The MTA's actual farebox revenue, to check the model
+- [MTA Daily Ridership and Traffic: Beginning 2020](https://data.ny.gov/Transportation/MTA-Daily-Ridership-and-Traffic-Beginning-2020/sayj-mze2) — Access-A-Ride trips; official ridership totals
+- [Community Development Block Grant (CDBG) Eligibility by Census Tract](https://data.cityofnewyork.us/City-Government/Community-Development-Block-Grant-CDBG-Eligibility/qmcw-ur37) — Neighborhood income around each station (HUD low/moderate-income share)
+- [Census 2023 Gazetteer, census tracts (New York)](https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2023_Gazetteer/2023_gaz_tracts_36.txt) — Tract locations, to match income to stations
+- [Fair Fares Enrollees](https://data.cityofnewyork.us/Social-Services/Fair-Fares-Enrollees/3tw8-6si8) — Monthly Fair Fares enrollment
+- [3-Month Treasury Bill Rate (DGS3MO)](https://fred.stlouisfed.org/series/DGS3MO) — Interest rate for the prepaid float (FRED, St. Louis Fed)
 
 ### Background
 
 - Daniel Kahneman and Amos Tversky, [Prospect Theory: An Analysis of Decision under Risk](https://doi.org/10.2307/1914185), *Econometrica*, 1979 — the source of the possibility effect behind the golden-station idea.
+
